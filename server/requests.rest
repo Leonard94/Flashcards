@@ -12,3 +12,7 @@ Content-Type: application/json
 
 ### Выход пользователя (удаляем токен из куки)
 POST http://localhost:5000/logout
+
+
+### Проверка
+GET http://localhost:5000
