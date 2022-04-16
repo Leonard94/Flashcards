@@ -1,0 +1,14 @@
+### Проверка куки на токен
+GET http://localhost:5000/user
+
+### Регистрация нового пользователя
+POST http://localhost:5000/user/create-new
+Content-Type: application/json
+
+{
+    "email": "requests rest 2",
+    "password": "1234"
+}
+
+### Выход пользователя (удаляем токен из куки)
+POST http://localhost:5000/logout

@@ -1,0 +1,63 @@
+.header {
+    background: green;
+    color: white;
+}
+
+.header__inner {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    height: 70px;
+}
+
+.header__logo {
+    font-size: 30px;
+    color: white;
+}
+
+.header__auth {
+    color: white;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+
+    .header-auth__user {
+        span {
+            color: orange;
+            font-weight: 500;
+        }
+    }
+    .header-auth__logout {
+        button {
+            padding: 10px;
+            background: inherit;
+            border: 1px solid black;
+        }
+    }
+
+    .header-auth__login {
+        a {
+            padding: 10px;
+            border: 1px solid black;
+        }
+    }
+    .header-auth__register {
+        a {
+            padding: 10px;
+            background: orange;
+        }
+    }
+}
+
+.menu {
+    display: flex;
+    justify-content: space-between;
+}
+
+.menu__list {
+    display: flex;
+    justify-content: space-between;
+    li {
+        padding: 15px;
+    }
+}
