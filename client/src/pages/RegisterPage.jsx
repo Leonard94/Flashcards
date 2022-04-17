@@ -1,23 +1,33 @@
-import { useState } from 'react'
-import { useDispatch } from 'react-redux'
+import { useDispatch, useSelector } from 'react-redux'
 import { registerNewUser } from '../store/user/user-actions'
 import { useForm } from 'react-hook-form'
+import { isLoading, selectAllInfo, selectCurrentUser, selectError } from '../store/user/user-selectors'
+import { Navigate } from 'react-router-dom'
 
 export function RegisterPage() {
     const dispatch = useDispatch()
+
+    // const error = useSelector(selectError)
+    // const loading = useSelector(isLoading)
+    // const user = useSelector(selectCurrentUser)
+
+    const { error, loading, email: user } = useSelector(selectAllInfo)
 
     const {
         register,
         handleSubmit,
         formState: { errors, isValid },
-        reset,
+        // reset,
         getValues,
     } = useForm({ mode: 'all' })
 
     const onSubmit = (data) => {
         const { firstName: name, mail: email, password } = data
         dispatch(registerNewUser({ name, email, password }))
-        reset()
+    }
+
+    if (user) {
+        return <Navigate to={'/'} />
     }
 
     return (
@@ -33,6 +43,7 @@ export function RegisterPage() {
                         minLength: { value: 3, message: 'Минимальная длина поля 3 символа' },
                     })}
                 />
+                {error && <small>{error}</small>}
                 <small>{errors?.firstName && errors.firstName.message}</small>
             </section>
 
@@ -93,8 +104,8 @@ export function RegisterPage() {
                 <small>{errors?.checkbox && errors.checkbox.message}</small>
             </section>
 
-            <button type='onSubmit' disabled={!isValid}>
-                Зарегистрироваться
+            <button type='submit' disabled={!isValid}>
+                {loading ? 'Загрузка' : 'Зарегистрироваться'}
             </button>
         </form>
     )

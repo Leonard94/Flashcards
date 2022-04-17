@@ -1,10 +1,22 @@
 import axios from 'axios'
 
 export const IS_AUTH_USER = 'IS_AUTH_USER'
+export const SET_ERROR = 'SET_ERROR'
+export const SET_LOADING = 'SET_LOADING'
 
 const isAuthUser = (email) => ({
     type: IS_AUTH_USER,
     payload: email,
+})
+
+const setError = (error) => ({
+    type: SET_ERROR,
+    payload: error,
+})
+
+const setLoading = (boolean) => ({
+    type: SET_LOADING,
+    payload: boolean,
 })
 
 export const checkIsAuthUser = () => (dispatch) => {
@@ -14,6 +26,7 @@ export const checkIsAuthUser = () => (dispatch) => {
 }
 
 export const login = (data) => (dispatch) => {
+    dispatch(setLoading(true))
     axios
         .post('http://localhost:5000/user/login', data, {
             withCredentials: true,
@@ -21,11 +34,14 @@ export const login = (data) => (dispatch) => {
         .then((response) => {
             dispatch(isAuthUser(response.data.email))
         })
-        .catch((err) => console.log(err.message))
+        .catch((err) => {
+            dispatch(setError(err.response.data.message))
+        })
+    
 }
 
 export const registerNewUser = (data) => (dispatch) => {
-    console.log('user-action data =>>', data)
+    dispatch(setLoading(true))
     axios
         .post('http://localhost:5000/user/create-new', data, {
             withCredentials: true,
@@ -34,11 +50,11 @@ export const registerNewUser = (data) => (dispatch) => {
             dispatch(isAuthUser(response.data.email))
         })
         .catch((err) => {
-            console.log(err.message)
-            console.log(err.toJSON())
+            dispatch(setError(err.response.data.message))
         })
 }
 
 export const logout = () => (dispatch) => {
+    dispatch(setLoading(true))
     axios.post('http://localhost:5000/user/logout', {}, { withCredentials: true }).then(dispatch(isAuthUser(null)))
 }

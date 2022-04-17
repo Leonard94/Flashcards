@@ -85,7 +85,7 @@ router.post('/login', async (req, res) => {
         // Ищем пользователя по email (Аутентификация)
         const user = await User.findOne({ email })
         if (!user) {
-            res.status(400).json({ message: 'Неверный логин или пароль' })
+            res.status(401).json({ message: 'Неверный логин или пароль' })
             console.log('Неверный логин - такого пользователя не существует')
             return
         }
