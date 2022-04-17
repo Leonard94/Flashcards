@@ -18,7 +18,7 @@ router.post('/create-new', async (req, res) => {
         }
 
         const hashedPassword = bcrypt.hashSync(req.body.password, 10)
-        const user = await new User({ password: hashedPassword, email: req.body.email })
+        const user = await new User({ password: hashedPassword, email: req.body.email, name: req.body.name })
 
         await user
             .save()
@@ -102,6 +102,7 @@ router.post('/login', async (req, res) => {
                     res.cookie('token', token).json({
                         id: user._id,
                         email: user.email,
+                        name: user.name,
                     })
                 }
             })

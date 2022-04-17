@@ -29,9 +29,10 @@ const UserSchema = new mongoose.Schema({
         type: String,
         required: true,
     },
-    // user: {
-    //     type: mongoose.SchemaTypes.ObjectId,
-    // },
+    name: {
+        type: String,
+        requred: true
+    },
     sets: [SetsSchema],
 })
 

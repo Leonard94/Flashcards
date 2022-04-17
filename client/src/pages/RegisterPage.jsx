@@ -1,7 +1,7 @@
 import { useDispatch, useSelector } from 'react-redux'
 import { registerNewUser } from '../store/user/user-actions'
 import { useForm } from 'react-hook-form'
-import { isLoading, selectAllInfo, selectCurrentUser, selectError } from '../store/user/user-selectors'
+import { selectAllInfo } from '../store/user/user-selectors'
 import { Navigate } from 'react-router-dom'
 
 export function RegisterPage() {
@@ -22,7 +22,7 @@ export function RegisterPage() {
     } = useForm({ mode: 'all' })
 
     const onSubmit = (data) => {
-        const { firstName: name, mail: email, password } = data
+        const { name, mail: email, password } = data
         dispatch(registerNewUser({ name, email, password }))
     }
 
@@ -33,18 +33,18 @@ export function RegisterPage() {
     return (
         <form onSubmit={handleSubmit(onSubmit)}>
             <section>
-                <label>Логин</label>
+                <label>Имя</label>
                 <input
                     type='text'
                     placeholder='Введите имя'
                     maxLength='25'
-                    {...register('firstName', {
+                    {...register('name', {
                         required: 'Это обязательное поле',
                         minLength: { value: 3, message: 'Минимальная длина поля 3 символа' },
                     })}
                 />
                 {error && <small>{error}</small>}
-                <small>{errors?.firstName && errors.firstName.message}</small>
+                <small>{errors?.name && errors.name.message}</small>
             </section>
 
             <section>

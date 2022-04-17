@@ -15,7 +15,7 @@ import { selectCurrentUser } from './store/user/user-selectors'
 function App() {
     const dispatch = useDispatch()
 
-    const userEmail = useSelector(selectCurrentUser)
+    const { email: userEmail, name: userName } = useSelector(selectCurrentUser)
 
     useEffect(() => {
         if (!userEmail) {
@@ -31,7 +31,7 @@ function App() {
 
     return (
         <>
-            <Header userEmail={userEmail} logout={logoutHandler} />
+            <Header userEmail={userEmail} userName={userName} logout={logoutHandler} />
             <main>
                 <div className='container'>
                     <Routes>

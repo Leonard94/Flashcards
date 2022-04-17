@@ -1,6 +1,6 @@
 import { NavLink } from 'react-router-dom'
 
-export function Header({ userEmail, logout }) {
+export function Header({ userEmail, userName, logout }) {
     return (
         <header className='header'>
             <div className='header__container container'>
@@ -32,7 +32,7 @@ export function Header({ userEmail, logout }) {
                             <>
                                 <li className='header-auth__user'>
                                     <h5>
-                                        Hello, <span>{userEmail}</span>
+                                        Hello, <span>{userName}</span>
                                     </h5>
                                 </li>
                                 <li className='header-auth__logout'>

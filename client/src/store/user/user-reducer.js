@@ -1,17 +1,19 @@
-import { IS_AUTH_USER, SET_ERROR, SET_LOADING } from './user-actions'
+import { SET_USER, SET_ERROR, SET_LOADING } from './user-actions'
 
 const initialState = {
     email: null,
+    name: null,
     loading: false,
     error: null,
 }
 
 export const userReducer = (state = initialState, action) => {
     switch (action.type) {
-        case IS_AUTH_USER:
+        case SET_USER:
             return {
                 ...state,
-                email: action.payload,
+                email: action.email,
+                name: action.name,
                 error: null,
                 loading: false,
             }
