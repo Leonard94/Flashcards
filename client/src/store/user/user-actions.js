@@ -24,7 +24,8 @@ export const login = (data) => (dispatch) => {
         .catch((err) => console.log(err.message))
 }
 
-export const register = (data) => (dispatch) => {
+export const registerNewUser = (data) => (dispatch) => {
+    console.log('user-action data =>>', data)
     axios
         .post('http://localhost:5000/user/create-new', data, {
             withCredentials: true,

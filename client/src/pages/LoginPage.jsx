@@ -14,7 +14,6 @@ export function LoginPage() {
     const handlerFormLogin = (e) => {
         e.preventDefault()
         const data = { email: mailValue, password: passwordValue }
-
         dispatch(login(data))
     }
 
