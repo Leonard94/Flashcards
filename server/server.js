@@ -26,3 +26,4 @@ start()
 
 // Роуты
 app.use('/user', require('./routes/user'))
+app.use('/sets', require('./routes/sets'))

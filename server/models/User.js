@@ -9,12 +9,15 @@ const StudySchema = new mongoose.Schema({
         type: String,
         // required: true,
     },
+    completed: {
+        type: Boolean,
+    },
 })
 
 const SetsSchema = new mongoose.Schema({
     title: {
         type: String,
-        // required: true,
+        required: true,
     },
     study: [StudySchema],
 })
@@ -31,7 +34,7 @@ const UserSchema = new mongoose.Schema({
     },
     name: {
         type: String,
-        requred: true
+        requred: true,
     },
     sets: [SetsSchema],
 })

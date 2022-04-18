@@ -33,7 +33,6 @@ export const login = (data) => (dispatch) => {
             withCredentials: true,
         })
         .then((response) => {
-            console.log(response.data)
             dispatch(setUser(response.data.email, response.data.name))
         })
         .catch((err) => {

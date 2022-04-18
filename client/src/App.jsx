@@ -1,4 +1,3 @@
-import axios from 'axios'
 import { Routes, Route } from 'react-router-dom'
 import { useEffect } from 'react'
 import { useDispatch, useSelector } from 'react-redux'
@@ -6,6 +5,7 @@ import { useDispatch, useSelector } from 'react-redux'
 import { HomePage } from './pages/HomePage'
 import { LoginPage } from './pages/LoginPage'
 import { RegisterPage } from './pages/RegisterPage'
+import { SetsPage } from './pages/SetsPage'
 
 import { Header } from './components/Header'
 
@@ -35,7 +35,7 @@ function App() {
             <main>
                 <div className='container'>
                     <Routes>
-                        <Route path='/' element={<HomePage />} />
+                        <Route path='/' element={userEmail ? <SetsPage /> : <HomePage />} />
                         <Route path='/login' element={<LoginPage />} />
                         <Route path='/register' element={<RegisterPage />} />
                     </Routes>
