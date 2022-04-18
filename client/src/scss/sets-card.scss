@@ -9,8 +9,11 @@
         height: 150px;
         border-radius: 10px;
         transition: all 0.3s ease;
-        cursor: pointer;
         color: white;
         padding: 20px;
+        a {
+            cursor: pointer;
+            color: white;
+        }
     }
 }

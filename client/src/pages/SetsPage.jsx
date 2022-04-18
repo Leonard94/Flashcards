@@ -29,7 +29,9 @@ export function SetsPage() {
             ) : (
                 <ul className='sets-card__list'>
                     {sets.map((set) => (
-                        <SetsCard key={set._id} {...set} />
+                        <li key={set._id}>
+                            <SetsCard {...set} />
+                        </li>
                     ))}
                 </ul>
             )}

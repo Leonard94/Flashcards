@@ -1,8 +1,8 @@
 import axios from 'axios'
 
-export const SET_SETS_LIST = 'SET_SETS_LIST'
-export const SET_LOADING = 'SET_LOADING'
-export const SET_ERROR = 'SET_ERROR'
+export const SET_SETS_LIST = '@@sets/SET_SETS_LIST'
+export const SET_LOADING = '@@sets/SET_LOADING'
+export const SET_ERROR = '@@sets/SET_ERROR'
 
 const setSetsList = (sets) => ({
     type: SET_SETS_LIST,

@@ -33,3 +33,7 @@ Content-Type: application/json
 {
     "title": "Тестовое название 2 из requests.rest"
 }
+
+###
+GET http://localhost:5000/sets/625d71797f79e7259f60cb2e
+

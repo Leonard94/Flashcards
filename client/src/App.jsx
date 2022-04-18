@@ -11,6 +11,7 @@ import { Header } from './components/Header'
 
 import { checkIsAuthUser, logout } from './store/user/user-actions'
 import { selectCurrentUser } from './store/user/user-selectors'
+import { SetDetailPage } from './pages/SetDetailPage'
 
 function App() {
     const dispatch = useDispatch()
@@ -38,6 +39,7 @@ function App() {
                         <Route path='/' element={userEmail ? <SetsPage /> : <HomePage />} />
                         <Route path='/login' element={<LoginPage />} />
                         <Route path='/register' element={<RegisterPage />} />
+                        <Route path='/:setId' element={<SetDetailPage />} />
                     </Routes>
                 </div>
             </main>

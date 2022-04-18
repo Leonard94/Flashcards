@@ -38,4 +38,17 @@ router.post('/new-set', async (req, res) => {
     }
 })
 
+// Получаем определенный набор
+router.get('/:setid', async (req, res) => {
+    try {
+        const payload = jwt.verify(req.cookies.token, config.get('JWTSECRET'))
+        const user = await User.findById(payload.id)
+        const targetSet = user.sets.filter((set) => set.id === req.params.setid)
+        res.send(targetSet)
+    } catch (e) {
+        res.status(500).json(e.message)
+        console.log(e)
+    }
+})
+
 module.exports = router
