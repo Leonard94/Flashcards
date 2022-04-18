@@ -23,7 +23,11 @@ export function SetsPage() {
             <h2>Sets page</h2>
             {addMode && <AddNewSet back={setAddMode} />}
             <br />
-            {!addMode && <button onClick={() => setAddMode(true)}>Добавить новый набор</button>}
+            {!addMode && (
+                <button onClick={() => setAddMode(true)}>
+                    Добавить новый набор
+                </button>
+            )}
             {!sets.length ? (
                 <h2>Вы еще не добавили ни одного набора</h2>
             ) : (

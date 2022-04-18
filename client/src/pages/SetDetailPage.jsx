@@ -1,6 +1,7 @@
 import { useEffect, useState } from 'react'
 import { useDispatch, useSelector } from 'react-redux'
 import { Navigate, useParams } from 'react-router-dom'
+import { AddNewWord } from '../components/AddNewWord'
 
 import { deleteTheSet, getTheSet } from '../store/set/set-actions'
 import { selectCurrentSet } from '../store/set/set-selectors'
@@ -11,6 +12,7 @@ export function SetDetailPage() {
     const { setId } = useParams()
     const { title, study: words, _id: id } = useSelector(selectCurrentSet)
     const [redirect, setRedirect] = useState(false)
+    const [addMode, setAddMode] = useState(false)
 
     useEffect(() => {
         dispatch(getTheSet(setId))
@@ -21,7 +23,6 @@ export function SetDetailPage() {
             // После успешного удаления
             setRedirect(true) // Редирект на страницу с наборами
             dispatch(getSetsList) // Обновляем список наборов
-            // Т.к. удаление это редкость, потому делаем так, а не через размонтирование страницы наборов
         })
     }
 
@@ -33,15 +34,26 @@ export function SetDetailPage() {
         return (
             <>
                 <h1>{title}</h1>
-                <button onClick={deleteHandle}>Удалить набор</button>
+                <button style={{ background: 'red' }} onClick={deleteHandle}>
+                    Удалить набор
+                </button>
+                <br />
+                {addMode ? (
+                    <AddNewWord back={setAddMode} id={id} />
+                ) : (
+                    <button onClick={() => setAddMode(true)}>Добавить</button>
+                )}
+
                 {!words.length ? (
-                    <h4>Вы еще не добавили слова в набор</h4>
+                    <>
+                        <h2 style={{ fontSize: '24px' }}>В наборе еще нет слов</h2>
+                    </>
                 ) : (
                     <>
                         <h6>На изучении:</h6>
                         <ul>
                             {words.map((word) => (
-                                <li key={word.idWord}>
+                                <li key={word._id}>
                                     <span>{word.front}</span> | <span>{word.back}</span>
                                 </li>
                             ))}

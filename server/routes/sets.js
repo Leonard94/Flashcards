@@ -52,13 +52,38 @@ router.get('/set/:setid', async (req, res) => {
 })
 
 // Удаляем определённый набор
-router.put('/set/delete/:setId', async (req, res) => {
+router.put('/set/delete', async (req, res) => {
     try {
         const payload = jwt.verify(req.cookies.token, config.get('JWTSECRET'))
         const user = await User.findById(payload.id)
         user.sets = user.sets.filter((set) => set.id !== req.body.setId)
         await user.save()
         res.send('Success')
+    } catch (e) {
+        res.status(500).json(e.message)
+        console.log(e)
+    }
+})
+
+// Добавляем слово в набор
+router.put('/set/add-new-word', async (req, res) => {
+    try {
+        const payload = jwt.verify(req.cookies.token, config.get('JWTSECRET'))
+        const user = await User.findById(payload.id)
+
+        // Перебираем все наборы
+        user.sets.map((set) => {
+            if (set.id === req.body.setId) {
+                // В нужном наборе добавляем новый объект слово
+                set.study.push({
+                    front: req.body.front,
+                    back: req.body.back,
+                    completed: false,
+                })
+            }
+            return set
+        })
+        await user.save().then((result) => res.send(result))
     } catch (e) {
         res.status(500).json(e.message)
         console.log(e)
