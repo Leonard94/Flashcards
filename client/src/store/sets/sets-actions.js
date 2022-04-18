@@ -21,7 +21,6 @@ const setError = (error) => ({
 
 export const getSetsList = () => (dispatch) => {
     dispatch(setLoading(true))
-    console.log('getSetsList')
     axios
         .get('http://localhost:5000/sets', { withCredentials: true })
         .then((response) => {

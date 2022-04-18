@@ -19,16 +19,26 @@ const setError = (error) => ({
     payload: error,
 })
 
-export const getWords = (setId) => async (dispatch) => {
-    console.log(setId)
+export const getTheSet = (setId) => async (dispatch) => {
     axios
-        .get(`http://localhost:5000/sets/${setId}`, { withCredentials: true })
+        .get(`http://localhost:5000/sets/set/${setId}`, { withCredentials: true })
         .then((response) => {
-            console.log(response.data[0])
             dispatch(setCurrentSet(response.data[0]))
         })
         .catch((err) => {
-            // setError(err.response)
+            setError(err.response)
             console.log(err.response)
+        })
+}
+
+export const deleteTheSet = (setId) => async (dispatch) => {
+    return axios
+        .put(`http://localhost:5000/sets/set/delete/${setId}`, { setId }, { withCredentials: true })
+        .then((response) => {
+            console.log(response)
+        })
+        .catch((err) => {
+            console.log(err.response)
+            setError(err.response)
         })
 }
