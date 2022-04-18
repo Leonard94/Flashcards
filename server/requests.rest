@@ -24,3 +24,12 @@ Content-Type: application/json
 
 ### Получение всех наборов пользователя
 GET http://localhost:5000/sets/
+
+
+### Создание нового набора у пользователя
+POST http://localhost:5000/sets/new-set
+Content-Type: application/json
+
+{
+    "title": "Тестовое название 2 из requests.rest"
+}

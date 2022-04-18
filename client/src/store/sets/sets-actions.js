@@ -19,14 +19,29 @@ const setError = (error) => ({
     payload: error,
 })
 
-export const getSetsList = (data) => (dispatch) => {
+export const getSetsList = () => (dispatch) => {
     dispatch(setLoading(true))
+    console.log('getSetsList')
     axios
-        .get('http://localhost:5000/sets/', { withCredentials: true })
+        .get('http://localhost:5000/sets', { withCredentials: true })
         .then((response) => {
             dispatch(setSetsList(response.data))
         })
         .catch((err) => {
+            setError(err.response)
+            console.log(err.response)
+        })
+}
+
+export const addNewSet = (data) => (dispatch) => {
+    return axios
+        .post('http://localhost:5000/sets/new-set', { title: data }, { withCredentials: true })
+        .then((response) => {
+            console.log(response)
+            // Добавить сообщение успешно!
+        })
+        .catch((err) => {
+            setError(err.response.data.message)
             console.log(err.response.data)
         })
 }
