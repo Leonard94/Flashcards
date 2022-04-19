@@ -10,11 +10,15 @@ export function SetTitle({ title, id }) {
 
     const onSubmit = (e) => {
         e.preventDefault()
-        const data = { setId: id, title: name }
-        dispatch(renameTheSet(data)).then(() => {
+        if (title !== name) {
+            const data = { setId: id, title: name }
+            dispatch(renameTheSet(data)).then(() => {
+                setEditMode(false)
+                dispatch(getTheSet(id))
+            })
+        } else {
             setEditMode(false)
-            dispatch(getTheSet(id))
-        })
+        }
     }
 
     return (
