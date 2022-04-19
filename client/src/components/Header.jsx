@@ -1,12 +1,14 @@
 import { NavLink } from 'react-router-dom'
+import logo from '../assets/img/Logo.svg'
+import userLogo from '../assets/img/img-profile.svg'
 
 export function Header({ userEmail, userName, logout }) {
     return (
         <header className='header'>
-            <div className='header__container container'>
+            <div className='container'>
                 <div className='header__inner'>
                     <NavLink to='/' className='header__logo'>
-                        Logotype
+                        <img src={logo} alt='logo' />
                     </NavLink>
                     <nav className='menu'>
                         <ul className='menu__list'>
@@ -31,9 +33,8 @@ export function Header({ userEmail, userName, logout }) {
                         {userEmail ? (
                             <>
                                 <li className='header-auth__user'>
-                                    <h5>
-                                        Hello, <span>{userName}</span>
-                                    </h5>
+                                    <img src={userLogo} alt='avatar' />
+                                    <span>{userName}</span>
                                 </li>
                                 <li className='header-auth__logout'>
                                     <button onClick={logout}>Выйти</button>

@@ -1,0 +1,112 @@
+.sets-card__list {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(100px, 386px));
+    gap: 30px;
+}
+
+.sets-card__body {
+    background-color: $background-color--light;
+    height: 182px;
+    border-radius: $border-radius;
+    transition: all 0.3s ease;
+    &:hover {
+        transform: translateY(-2px);
+    }
+    a {
+        display: block;
+        padding: 40px;
+        width: 100%;
+        height: 100%;
+        font-weight: 500;
+        cursor: pointer;
+        display: flex;
+        flex-direction: column;
+        justify-content: space-between;
+    }
+}
+.sets-card__title {
+    font-size: 24px;
+    color: $color-text--main;
+    line-height: 120%;
+}
+.sets-card__subtitle {
+    font-size: 16px;
+    line-height: 100%;
+    color: $color-text--second;
+}
+
+.add-set {
+    background-color: $background-color--light;
+    height: 182px;
+    border-radius: $border-radius;
+}
+
+.add-set__body {
+    padding: 40px;
+    width: 100%;
+    height: 100%;
+    font-weight: 500;
+}
+.add-set__subtitle {
+    font-size: 16px;
+    line-height: 100%;
+    color: $color-text--second;
+    font-weight: 500;
+}
+
+.add-set__add-body {
+    width: 100%;
+    height: 100%;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    align-items: center;
+    cursor: pointer;
+}
+.add-set__img {
+    max-width: 45px;
+    transition: all 0.4s ease;
+}
+
+.add-set__add-body:hover .add-set__img {
+    transform: rotateZ(90deg);
+}
+
+.add-set__form {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    flex-direction: column;
+    height: 100%;
+    input {
+        width: 100%;
+        height: 30px;
+        font-size: 24px;
+        line-height: 120%;
+        border: none;
+        color: $color-text--main;
+        background: $background-color--light;
+    }
+}
+.add-set__btn-row {
+    display: flex;
+    justify-content: space-between;
+    width: 100%;
+}
+
+.add-set__btn {
+    padding: 5px 15px;
+    border-radius: 8px;
+    font-size: 12px;
+    line-height: 100%;
+}
+
+.add-set__btn--remove {
+    background: inherit;
+    color: $color-text--second;
+    border: 1px solid $color-text--second;
+}
+.add-set__btn--submit {
+    background: $color-main;
+    color: $background-color--dark;
+}
