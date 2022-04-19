@@ -111,4 +111,35 @@ router.put('/set/rename', async (req, res) => {
     }
 })
 
+// Изменяем имя и перевод термина
+router.put('/set/term/rename', async (req, res) => {
+    try {
+        const payload = jwt.verify(req.cookies.token, config.get('JWTSECRET'))
+        const user = await User.findById(payload.id)
+
+        // Перебираем все наборы
+        const updateUser = user.sets.map((s) => {
+            // Если это нужный набор
+            if (s.id === req.body.setId) {
+                // перебираем слова в нужном наборе оставляем все кроме цели
+                s.study.map((term) => {
+                    if (term.id === req.body.termId) {
+                        term.front = req.body.front
+                        term.back = req.body.back
+                    }
+                    return term
+                })
+            }
+            return s
+        })
+
+        user.sets = updateUser
+        await user.save()
+        res.send(user)
+    } catch (e) {
+        res.status(500).json(e.message)
+        console.log(e)
+    }
+})
+
 module.exports = router

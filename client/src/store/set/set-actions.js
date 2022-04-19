@@ -66,3 +66,15 @@ export const renameTheSet = (data) => async (dispatch) => {
             setError(err.response)
         })
 }
+
+export const renameTheTerm = (data) => async (dispatch) => {
+    return axios
+        .put(`http://localhost:5000/sets/set/term/rename`, data, { withCredentials: true })
+        .then((response) => {
+            // Если бы сервер возвращал актуальную версию текущего набора, можно было сразу диспачить отсюда
+        })
+        .catch((err) => {
+            console.log(err.response)
+            setError(err.response)
+        })
+}

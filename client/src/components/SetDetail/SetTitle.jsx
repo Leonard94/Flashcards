@@ -8,7 +8,8 @@ export function SetTitle({ title, id }) {
 
     const dispatch = useDispatch()
 
-    const onSubmit = () => {
+    const onSubmit = (e) => {
+        e.preventDefault()
         const data = { setId: id, title: name }
         dispatch(renameTheSet(data)).then(() => {
             setEditMode(false)

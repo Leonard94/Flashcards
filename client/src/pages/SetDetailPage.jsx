@@ -56,7 +56,7 @@ export function SetDetailPage() {
                         <h6>На изучении:</h6>
                         <ul>
                             {terms.map((term) => (
-                                <Term key={term._id} {...term} />
+                                <Term key={term._id} setId={setId} {...term} />
                             ))}
                         </ul>
                     </>
