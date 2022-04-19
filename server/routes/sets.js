@@ -90,4 +90,25 @@ router.put('/set/add-new-word', async (req, res) => {
     }
 })
 
+// Изменяем имя набора
+router.put('/set/rename', async (req, res) => {
+    try {
+        const payload = jwt.verify(req.cookies.token, config.get('JWTSECRET'))
+        const user = await User.findById(payload.id)
+
+        user.sets.map((set) => {
+            if (set.id === req.body.setId) {
+                set.title = req.body.title
+            }
+            return set
+        })
+
+        await user.save()
+        res.send(user)
+    } catch (e) {
+        res.status(500).json(e.message)
+        console.log(e)
+    }
+})
+
 module.exports = router

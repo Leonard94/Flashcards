@@ -35,7 +35,7 @@ export const deleteTheSet = (setId) => async (dispatch) => {
     return axios
         .put(`http://localhost:5000/sets/set/delete`, { setId }, { withCredentials: true })
         .then((response) => {
-            // 
+            //
         })
         .catch((err) => {
             console.log(err.response)
@@ -46,6 +46,18 @@ export const deleteTheSet = (setId) => async (dispatch) => {
 export const addNewWordToTheSet = (data) => async (dispatch) => {
     return axios
         .put(`http://localhost:5000/sets/set/add-new-word`, data, { withCredentials: true })
+        .then((response) => {
+            // Если бы сервер возвращал актуальную версию текущего набора, можно было сразу диспачить отсюда
+        })
+        .catch((err) => {
+            console.log(err.response)
+            setError(err.response)
+        })
+}
+
+export const renameTheSet = (data) => async (dispatch) => {
+    return axios
+        .put(`http://localhost:5000/sets/set/rename`, data, { withCredentials: true })
         .then((response) => {
             // Если бы сервер возвращал актуальную версию текущего набора, можно было сразу диспачить отсюда
         })
