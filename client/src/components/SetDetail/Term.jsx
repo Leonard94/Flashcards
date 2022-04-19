@@ -1,6 +1,6 @@
 import { useState } from 'react'
 import { useDispatch } from 'react-redux'
-import { getTheSet, renameTheTerm } from '../../store/set/set-actions'
+import { getTheSet, removeTheTerm, renameTheTerm } from '../../store/set/set-actions'
 
 export function Term({ front, back, setId, _id: termId }) {
     const [editMode, setEditMode] = useState(false)
@@ -28,7 +28,11 @@ export function Term({ front, back, setId, _id: termId }) {
         }
     }
     const deleteTheTerm = () => {
-        // toggleEditMode()
+        const data = { setId, termId }
+        dispatch(removeTheTerm(data)).then(() => {
+            dispatch(getTheSet(setId))
+            toggleEditMode()
+        })
     }
 
     return (
@@ -46,6 +50,9 @@ export function Term({ front, back, setId, _id: termId }) {
                     <form onSubmit={onSubmit}>
                         <input value={localFront} onChange={(e) => setLocalFront(e.target.value)} />
                         <input value={localBack} onChange={(e) => setLocalBack(e.target.value)} />
+                        <button onClick={deleteTheTerm} style={{ background: 'red' }}>
+                            Удалить термин
+                        </button>
                         <button type='submit'>ок</button>
                     </form>
                 </>

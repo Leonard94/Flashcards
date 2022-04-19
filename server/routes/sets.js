@@ -121,7 +121,7 @@ router.put('/set/term/rename', async (req, res) => {
         const updateUser = user.sets.map((s) => {
             // Если это нужный набор
             if (s.id === req.body.setId) {
-                // перебираем слова в нужном наборе оставляем все кроме цели
+                // перебираем все термины в нужном наборе
                 s.study.map((term) => {
                     if (term.id === req.body.termId) {
                         term.front = req.body.front
@@ -132,7 +132,28 @@ router.put('/set/term/rename', async (req, res) => {
             }
             return s
         })
+        user.sets = updateUser
+        await user.save()
+        res.send(user)
+    } catch (e) {
+        res.status(500).json(e.message)
+        console.log(e)
+    }
+})
 
+// Удаляем слово из набора
+router.put('/set/term/remove', async (req, res) => {
+    try {
+        const payload = jwt.verify(req.cookies.token, config.get('JWTSECRET'))
+        const user = await User.findById(payload.id)
+        // Перебираем все наборы
+        const updateUser = user.sets.map((s) => {
+            if (s.id === req.body.setId) {
+                // перебираем термины в нужном наборе оставляем всё кроме цели
+                s.study = s.study.filter((word) => word.id !== req.body.termId)
+            }
+            return s
+        })
         user.sets = updateUser
         await user.save()
         res.send(user)
