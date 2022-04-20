@@ -28,8 +28,6 @@ function App() {
         dispatch(logout())
     }
 
-    // [] - переделать readme
-
     return (
         <>
             <Header userEmail={userEmail} userName={userName} logout={logoutHandler} />

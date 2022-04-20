@@ -35,8 +35,12 @@ export function AddNewSet() {
                             minLength='2'
                         />
                         <div className='add-set__btn-row'>
-                            <button className="add-set__btn add-set__btn--remove" onClick={toggleAddMode}>Отмена</button>
-                            <button className="add-set__btn add-set__btn--submit" type='submit'>Добавить</button>
+                            <button className='add-set__btn add-set__btn--remove' onClick={toggleAddMode}>
+                                Отмена
+                            </button>
+                            <button className='add-set__btn add-set__btn--submit' type='submit'>
+                                Добавить
+                            </button>
                         </div>
                     </form>
                 )}
@@ -49,23 +53,4 @@ export function AddNewSet() {
             </div>
         </div>
     )
-    // return (
-    //     <>
-    //         <button onClick={() => back(false)}>Свернуть</button>
-    //         <br />
-    //         <h2>Добавить новый набор</h2>
-    //         <br />
-    //         <form onSubmit={submit}>
-    //             <input
-    //                 type='text'
-    //                 placeholder='Введите имя набора'
-    //                 value={title}
-    //                 onChange={(e) => setTitle(e.target.value)}
-    //                 maxLength='50'
-    //                 minLength='3'
-    //             />
-    //             <button type='submit'>Добавить</button>
-    //         </form>
-    //     </>
-    // )
 }
