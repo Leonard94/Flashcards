@@ -43,10 +43,10 @@ main {
 	margin: 60px 0;
 }
 
-button {
+.btn {
 	font-size: 14px;
 	line-height: 140%;
-    font-weight: 400;
+	font-weight: 400;
 	color: $color-text--main;
 
 	padding: 9px 22px;
@@ -56,13 +56,16 @@ button {
 .btn--solid {
 	background: $color-main;
 }
+
 .btn--outline {
-	border: 1px solid $color-text--main;
+	background: inherit;
+	border: 1px solid $color-main;
 }
 
 @import './scss/header.scss';
 @import './scss/form.scss';
 @import './scss/sets-page.scss';
-@import './scss/set-detail-page.scss';
+@import './scss/detailSet-about.scss';
 @import './scss/term-list.scss';
+@import './scss/dropdown.scss';
 @import './scss/footer.scss';
