@@ -8,41 +8,48 @@ import { RegisterPage } from './pages/RegisterPage'
 import { SetsPage } from './pages/SetsPage'
 
 import { Header } from './components/Header'
+import { Footer } from './components/Footer'
 
 import { checkIsAuthUser, logout } from './store/user/user-actions'
 import { selectCurrentUser } from './store/user/user-selectors'
 import { SetDetailPage } from './pages/SetDetailPage'
 
 function App() {
-    const dispatch = useDispatch()
+	const dispatch = useDispatch()
 
-    const { email: userEmail, name: userName } = useSelector(selectCurrentUser)
+	const { email: userEmail, name: userName } = useSelector(selectCurrentUser)
 
-    useEffect(() => {
-        if (!userEmail) {
-            dispatch(checkIsAuthUser())
-        }
-    }, [userEmail, dispatch])
+	useEffect(() => {
+		if (!userEmail) {
+			dispatch(checkIsAuthUser())
+		}
+	}, [userEmail, dispatch])
 
-    const logoutHandler = () => {
-        dispatch(logout())
-    }
+	const logoutHandler = () => {
+		dispatch(logout())
+	}
 
-    return (
-        <>
-            <Header userEmail={userEmail} userName={userName} logout={logoutHandler} />
-            <main>
-                <div className='container'>
-                    <Routes>
-                        <Route path='/' element={userEmail ? <SetsPage /> : <HomePage />} />
-                        <Route path='/login' element={<LoginPage />} />
-                        <Route path='/register' element={<RegisterPage />} />
-                        <Route path='/:setId' element={<SetDetailPage />} />
-                    </Routes>
-                </div>
-            </main>
-        </>
-    )
+	return (
+		<>
+			<Header
+				userEmail={userEmail}
+				userName={userName}
+				logout={logoutHandler}
+			/>
+			<main>
+				<Routes>
+					<Route
+						path='/'
+						element={userEmail ? <SetsPage /> : <HomePage />}
+					/>
+					<Route path='/login' element={<LoginPage />} />
+					<Route path='/register' element={<RegisterPage />} />
+					<Route path='/:setId' element={<SetDetailPage />} />
+				</Routes>
+			</main>
+			<Footer />
+		</>
+	)
 }
 
 export default App

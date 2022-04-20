@@ -19,7 +19,7 @@ export function SetsPage() {
     }, [dispatch])
 
     return (
-        <>
+        <div className='container'>
             {/* <h2>Мои наборы</h2> */}
             {/* {addMode && <AddNewSet back={setAddMode} />} */}
             {/* {!addMode && <button onClick={() => setAddMode(true)}>Добавить новый набор</button>} */}
@@ -33,6 +33,6 @@ export function SetsPage() {
                     <AddNewSet />
                 </ul>
             )}
-        </>
+        </div>
     )
 }

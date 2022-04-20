@@ -31,7 +31,7 @@ export function AddNewWord({ back, id }) {
                     <input
                         type='text'
                         placeholder='Введите текст'
-                        maxLength='50'
+                        maxLength='100'
                         {...register('front', {
                             required: 'Это обязательное поле',
                             minLength: { value: 1, message: 'Минимальная длина поля 1 символ' },
@@ -45,7 +45,7 @@ export function AddNewWord({ back, id }) {
                     <input
                         type='text'
                         placeholder='Введите текст'
-                        maxLength='50'
+                        maxLength='100'
                         {...register('back', {
                             required: 'Это обязательное поле',
                             minLength: { value: 1, message: 'Минимальная длина поля 1 символ' },
