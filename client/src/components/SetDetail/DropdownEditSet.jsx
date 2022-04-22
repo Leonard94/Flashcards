@@ -2,7 +2,7 @@ import { useEffect, useState, useRef } from 'react'
 
 import iconSettings from '../../assets/icon/icon-settings.svg'
 import iconEdit from '../../assets/icon/icon-edit2.svg'
-import iconRemove from '../../assets/icon/icon-remove.svg'
+import iconRemove from '../../assets/icon/icon__remove.svg'
 
 export function DropdownEditSet({ setEditModeForTitle, deleteSetHandle }) {
 	const [isOpen, setIsOpen] = useState(false)

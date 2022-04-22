@@ -3,17 +3,21 @@ import { useDispatch } from 'react-redux'
 
 import { getTheSet, removeTheTerm, renameTheTerm } from '../../store/set/set-actions'
 import iconDetail from '../../assets/icon/icon-detail.svg'
+import iconRemove from '../../assets/icon/icon__remove.svg'
+import iconCompleted from '../../assets/icon/icon__completed.svg'
 
 export function Term({ front, back, setId, _id: termId }) {
 	const [editMode, setEditMode] = useState(false)
 	const [localFront, setLocalFront] = useState(front)
 	const [localBack, setLocalBack] = useState(back)
+	const [isOpenMenu, setIsOpenMenu] = useState(false)
 
 	const dispatch = useDispatch()
 
 	const toggleEditMode = () => {
 		setEditMode(!editMode)
 	}
+
 	const onSubmit = (e) => {
 		e.preventDefault()
 		if (front === localFront && back === localBack) {
@@ -38,38 +42,61 @@ export function Term({ front, back, setId, _id: termId }) {
 	}
 
 	return (
-		<li className='term-list__item'>
-			{!editMode && (
-				<div className='term-list__term'>
-					<div className='term-list__inner-front'>{front}</div>{' '}
-					<div className='term-list__inner-back'>{back}</div>
-					{/* <button onClick={toggleEditMode}>edit</button> */}
-					<img className='term-list__img' src={iconDetail} alt='detail' />
-				</div>
-			)}
+		<li className='term'>
+			<div className={`term__body ${editMode ? 'term__body--editmode' : ''}`}>
+				{!editMode && (
+					<div className='term__item'>
+						<div className='term-item__front'>{front}</div>
+						<div className='term-item__back'>{back}</div>
+						<img
+							className='term-item__img'
+							src={iconDetail}
+							alt='detail'
+							onClick={toggleEditMode}
+						/>
+					</div>
+				)}
 
-			{editMode && (
-				<>
-					<button onClick={toggleEditMode}>назад</button>
-					<form onSubmit={onSubmit}>
-						<input
+				{editMode && (
+					<form
+						onSubmit={onSubmit}
+						className='term__item term-item__inputs'
+					>
+						<textarea
+							className='term-item__front term-item__input'
+							placeholder={front}
 							value={localFront}
+							spellCheck='false'
+							autoFocus
 							onChange={(e) => setLocalFront(e.target.value)}
 						/>
-						<input
+						<textarea
+							className='term-item__back term-item__input'
+							placeholder={back}
 							value={localBack}
+							spellCheck='false'
 							onChange={(e) => setLocalBack(e.target.value)}
 						/>
-						<button
-							onClick={deleteTheTerm}
-							style={{ background: 'red' }}
-						>
-							Удалить термин
-						</button>
-						<button type='submit'>ок</button>
 					</form>
-				</>
-			)}
+				)}
+			</div>
+			<div className='term__btn-row'>
+				<button className='term-btn' onClick={deleteTheTerm}>
+					<img
+						className='term-item__input-img'
+						src={iconRemove}
+						alt='detail'
+					/>
+				</button>
+				<button className='term-btn' onClick={onSubmit}>
+					<img
+						className='term-item__input-img'
+						type='submit'
+						src={iconCompleted}
+						alt='detail'
+					/>
+				</button>
+			</div>
 		</li>
 	)
 }

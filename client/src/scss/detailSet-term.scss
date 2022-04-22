@@ -1,0 +1,121 @@
+.term-list {
+}
+
+.term {
+	margin-bottom: 20px;
+	&:last-child {
+		margin-bottom: 0;
+	}
+	position: relative;
+}
+
+.term__body {
+	min-height: 82px;
+	width: 100%;
+
+	padding: 30px 40px;
+
+	background: $background-color--light;
+	transition: all 0.4s ease;
+
+	position: relative;
+	z-index: 2;
+
+	&:hover .term-item__img {
+		opacity: 1;
+	}
+}
+
+.term__item {
+	display: flex;
+	justify-content: space-between;
+
+	font-size: 18px;
+	font-weight: 400;
+	line-height: 120%;
+	color: $color-text--main;
+
+	position: relative;
+
+	&:after {
+		content: '';
+		position: absolute;
+		top: 50%;
+		left: 50%;
+		transform: translate(-50%, -50%);
+
+		width: 1px;
+		height: 44px;
+
+		background: $background-color--dark;
+		opacity: 0.6;
+	}
+}
+
+.term-item__img {
+	position: absolute;
+	top: 50%;
+	right: -20px;
+	transform: translate(0, -50%);
+
+	opacity: 0;
+	width: 5px;
+	cursor: pointer;
+	transition: all 0.3s ease;
+}
+
+.term-item__front,
+.term-item__back {
+	width: 100%;
+}
+
+.term-item__front {
+	margin-right: 40px;
+}
+
+// Edit Mode is True
+
+.term__body--editmode {
+	width: calc(100% - 30px);
+}
+
+.term-item__inputs {
+}
+
+.term-item__input {
+	font-size: 18px;
+	font-weight: 400;
+	line-height: 120%;
+	color: $color-text--main;
+
+	overflow: hidden;
+	background: inherit;
+
+	// min-height: 100%;
+	resize: none;
+}
+
+.term__btn-row {
+	position: absolute;
+	top: 0;
+	right: 0;
+	height: 100%;
+
+	display: flex;
+	flex-direction: column;
+
+	z-index: 1;
+}
+
+.term-btn {
+	display: block;
+	width: 30px;
+	height: 100%;
+
+	background: #202229;
+	transition: all 0.3s ease;
+
+	&:hover {
+		background: #363a46;
+	}
+}

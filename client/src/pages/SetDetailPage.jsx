@@ -2,7 +2,7 @@ import { useEffect, useState } from 'react'
 import { useDispatch, useSelector } from 'react-redux'
 import { Navigate, useParams } from 'react-router-dom'
 
-import { AddNewWord } from '../components/AddNewWord'
+import { AddNewTerm } from '../components/SetDetail/AddNewTerm'
 import { EditSet } from '../components/SetDetail/EditSet'
 import { Term } from '../components/SetDetail/Term'
 
@@ -14,10 +14,14 @@ export function SetDetailPage() {
 	const { setId } = useParams()
 	const { title, study: terms = [], _id: id } = useSelector(selectCurrentSet)
 	const [redirect, setRedirect] = useState(false) // При удалении набора
-	// const [addMode, setAddMode] = useState(false)
+	const [addTermMode, setAddTermMode] = useState(false)
 
 	const study = terms.filter((term) => !term.completed) // На изучении
 	const completed = terms.filter((term) => term.completed) // Изучены
+
+	const toggleAddNewTermMode = () => {
+		setAddTermMode(!addTermMode)
+	}
 
 	useEffect(() => {
 		dispatch(getTheSet(setId))
@@ -47,21 +51,26 @@ export function SetDetailPage() {
 								Начать изучение
 							</button>
 							<br />
-							<button className='btn btn--outline'>
+							<button
+								onClick={toggleAddNewTermMode}
+								className='btn btn--outline'
+							>
 								Добавить&nbsp;термин
 							</button>
 						</div>
-
-						{/* <button style={{ background: 'red' }} onClick={deleteHandle}>
-							Удалить набор
-						</button> */}
-						{/* {addMode && <AddNewWord back={setAddMode} id={id} />}
-						{!addMode && (
+						{/* {!addMode && (
 							<button onClick={() => setAddMode(true)}>
-								Добавить слово в набор
+							Добавить слово в набор
 							</button>
 						)} */}
 					</section>
+
+					{addTermMode && (
+						<section className='detail__addterm'>
+							<h3>Добавить новый термин</h3>
+							<AddNewTerm goBack={toggleAddNewTermMode} id={id} />
+						</section>
+					)}
 
 					{study.length ? (
 						<section className='detail__list detail__list--learning'>
