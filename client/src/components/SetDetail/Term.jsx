@@ -57,6 +57,8 @@ export function Term({ front, back, setId, _id: termId }) {
 					</div>
 				)}
 
+				{/* Эта часть есть в AddNewTerm. Зарефакторить! */}
+
 				{editMode && (
 					<form
 						onSubmit={onSubmit}

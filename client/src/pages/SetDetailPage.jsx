@@ -2,9 +2,9 @@ import { useEffect, useState } from 'react'
 import { useDispatch, useSelector } from 'react-redux'
 import { Navigate, useParams } from 'react-router-dom'
 
+import { DetailAbout } from '../components/SetDetail/DetailAbout'
 import { AddNewTerm } from '../components/SetDetail/AddNewTerm'
-import { EditSet } from '../components/SetDetail/EditSet'
-import { Term } from '../components/SetDetail/Term'
+import { TermList } from '../components/SetDetail/TermList'
 
 import { getTheSet } from '../store/set/set-actions'
 import { selectCurrentSet } from '../store/set/set-selectors'
@@ -12,92 +12,55 @@ import { selectCurrentSet } from '../store/set/set-selectors'
 export function SetDetailPage() {
 	const dispatch = useDispatch()
 	const { setId } = useParams()
-	const { title, study: terms = [], _id: id } = useSelector(selectCurrentSet)
+	const { title, study: terms = [] } = useSelector(selectCurrentSet)
 	const [redirect, setRedirect] = useState(false) // При удалении набора
 	const [addTermMode, setAddTermMode] = useState(false)
+
+	useEffect(() => {
+		// Запросить информацию о наборе
+		dispatch(getTheSet(setId))
+	}, [setId, dispatch])
 
 	const study = terms.filter((term) => !term.completed) // На изучении
 	const completed = terms.filter((term) => term.completed) // Изучены
 
+	// Переключить режим добавления нового термина
 	const toggleAddNewTermMode = () => {
 		setAddTermMode(!addTermMode)
 	}
 
-	useEffect(() => {
-		dispatch(getTheSet(setId))
-	}, [setId, dispatch])
-
 	if (redirect) {
 		return <Navigate to={'/'} />
-	}
-
-	if (title) {
+	} else if (title) {
 		return (
 			<div className='container--small'>
 				<div className='detail'>
-					<section className='detail__about'>
-						<div className='detail__about-left'>
-							<EditSet
-								title={title}
-								id={id}
-								setRedirect={setRedirect}
-							/>
-							<div className='detail__about-allcounter'>
-								{terms.length} терминов
-							</div>
-						</div>
-						<div className='detail__about-right'>
-							<button className='btn btn--solid'>
-								Начать изучение
-							</button>
-							<br />
-							<button
-								onClick={toggleAddNewTermMode}
-								className='btn btn--outline'
-							>
-								Добавить&nbsp;термин
-							</button>
-						</div>
-						{/* {!addMode && (
-							<button onClick={() => setAddMode(true)}>
-							Добавить слово в набор
-							</button>
-						)} */}
-					</section>
+					<DetailAbout
+						title={title}
+						setId={setId}
+						setRedirect={setRedirect}
+						lengthOfSet={terms.length}
+						addTermMode={addTermMode}
+						toggleAddNewTermMode={toggleAddNewTermMode}
+					/>
 
 					{addTermMode && (
-						<section className='detail__addterm'>
-							<h3>Добавить новый термин</h3>
-							<AddNewTerm goBack={toggleAddNewTermMode} id={id} />
-						</section>
+						<AddNewTerm goBack={toggleAddNewTermMode} id={setId} />
 					)}
 
 					{study.length ? (
-						<section className='detail__list detail__list--learning'>
-							<h3>На изучении ({study.length})</h3>
-							{terms.length && (
-								<ul className='term-list'>
-									{terms.map((term) => (
-										<Term
-											key={term._id}
-											setId={setId}
-											{...term}
-										/>
-									))}
-								</ul>
-							)}
-						</section>
+						<TermList list={study} setId={setId} study={true} />
 					) : (
-						<h2>Вы еще не добавили ни одного термина</h2>
+						'Добавить новый термин'
 					)}
 
-					{/* <section className='detail__list detail__list--completed'>
-						<h3>Изучено (77)</h3>
-					</section> */}
+					{completed.length ? (
+						<TermList list={completed} setId={setId} />
+					) : null}
 				</div>
 			</div>
 		)
+	} else {
+		return <h2>Загрузка...</h2>
 	}
-
-	return <h2>Загрузка...</h2>
 }

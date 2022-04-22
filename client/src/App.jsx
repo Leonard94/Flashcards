@@ -25,6 +25,7 @@ function App() {
 		}
 	}, [userEmail, dispatch])
 
+	// Выйти из системы
 	const logoutHandler = () => {
 		dispatch(logout())
 	}

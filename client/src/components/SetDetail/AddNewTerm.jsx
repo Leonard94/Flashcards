@@ -20,46 +20,50 @@ export function AddNewTerm({ goBack, id }) {
 	}
 
 	return (
-		<div className='term'>
-			<div className='term__body term__body--editmode'>
-				<form onSubmit={addNew} className='term__item term-item__inputs'>
-					<textarea
-						className='term-item__front term-item__input'
-						placeholder='Лицевая сторона'
-						value={front}
-						spellCheck='false'
-						autoFocus
-						onChange={(e) => setFront(e.target.value)}
-					/>
-					<textarea
-						className='term-item__back term-item__input'
-						placeholder='Обратная сторона'
-						value={back}
-						spellCheck='false'
-						onChange={(e) => setBack(e.target.value)}
-					/>
-				</form>
-			</div>
+		<section className='detail__addterm'>
+			<h3>Добавить новый термин</h3>
 
-			<div className='term__btn-row'>
-				<button className='term-btn' onClick={goBack}>
-					<img
-						className='term-item__input-img'
-						src={iconBack}
-						alt='go back icon'
-						title='Не добавлять новый термин'
-					/>
-				</button>
-				<button className='term-btn' onClick={addNew}>
-					<img
-						className='term-item__input-img'
-						type='submit'
-						src={iconCompleted}
-						alt='submit'
-						title='Добавить новый термин'
-					/>
-				</button>
+			<div className='term'>
+				<div className='term__body term__body--editmode'>
+					<form onSubmit={addNew} className='term__item term-item__inputs'>
+						<textarea
+							className='term-item__front term-item__input'
+							placeholder='Лицевая сторона'
+							value={front}
+							spellCheck='false'
+							autoFocus
+							onChange={(e) => setFront(e.target.value)}
+						/>
+						<textarea
+							className='term-item__back term-item__input'
+							placeholder='Обратная сторона'
+							value={back}
+							spellCheck='false'
+							onChange={(e) => setBack(e.target.value)}
+						/>
+					</form>
+				</div>
+
+				<div className='term__btn-row'>
+					<button className='term-btn' onClick={goBack}>
+						<img
+							className='term-item__input-img'
+							src={iconBack}
+							alt='go back icon'
+							title='Не добавлять новый термин'
+						/>
+					</button>
+					<button className='term-btn' onClick={addNew}>
+						<img
+							className='term-item__input-img'
+							type='submit'
+							src={iconCompleted}
+							alt='submit'
+							title='Добавить новый термин'
+						/>
+					</button>
+				</div>
 			</div>
-		</div>
+		</section>
 	)
 }
