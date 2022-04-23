@@ -1,0 +1,144 @@
+.auth {
+	position: absolute;
+	top: 0;
+	left: 0;
+
+	width: 100%;
+	height: 100%;
+
+	background: $background-color--main;
+}
+
+.auth__container {
+	max-width: 610px;
+	margin: 50px auto 0px auto;
+	padding: 0 15px;
+}
+
+.auth__btn-row {
+	margin-bottom: 20px;
+}
+
+.auth__btn {
+	font-size: 32px;
+	font-weight: 500;
+	line-height: 120%;
+	color: $color-text--third;
+
+	position: relative;
+	background: inherit;
+
+	&:first-child {
+		margin-right: 40px;
+	}
+	&:after {
+		transition: all 0.3s ease;
+		content: '';
+		position: absolute;
+		bottom: -10px;
+		left: 50%;
+
+		transform: translate(-50%);
+
+		width: 115px;
+		height: 10px;
+
+		background-image: url('../assets/icon/icon__strip.svg');
+		background-repeat: no-repeat;
+		background-size: contain;
+
+		opacity: 0;
+		width: 40px;
+	}
+}
+
+.auth__btn--active {
+	color: $color-text--main;
+
+	&:after {
+		opacity: 1;
+		width: 115px;
+	}
+}
+
+.auth-form__body {
+	margin-bottom: 40px;
+	padding: 60px;
+
+	background: $background-color--light;
+	border-radius: 20px;
+}
+
+.auth-form__section {
+	margin-bottom: 20px;
+
+	&:last-of-type {
+		margin-bottom: 30px;
+	}
+
+	label:not(.auth-form__checkbox-row) {
+		font-size: 20px;
+		color: $color-text--third;
+		line-height: 120%;
+
+		margin-bottom: 5px;
+		display: block;
+	}
+
+	input:not(.auth-form__checkbox-row input) {
+		display: block;
+		height: 40px;
+		width: 100%;
+
+		font-size: 18px;
+		color: $color-text--main;
+
+		border-radius: 10px;
+		border: 1px solid $color-text--main;
+
+		padding: 0 15px;
+		background: inherit;
+
+		&:focus {
+			border-color: $color-main;
+		}
+		&::placeholder {
+			font-size: 14px;
+			font-weight: 300;
+		}
+	}
+
+	small {
+		color: $color-wrong;
+	}
+}
+
+.auth-form__checkbox-row {
+	font-size: 16px;
+	line-height: 120%;
+	display: block;
+    
+	input {
+		margin-right: 10px;
+	}
+}
+
+.auth-form__btn-row {
+	button {
+		position: relative;
+		display: block;
+		width: 100%;
+
+		&:last-child {
+			margin-top: 20px;
+		}
+
+		&:disabled {
+			background: $color-text--third;
+		}
+	}
+	span {
+		color: $color-main;
+		font-weight: 400;
+	}
+}

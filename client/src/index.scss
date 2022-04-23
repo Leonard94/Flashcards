@@ -4,6 +4,7 @@
 // Variables
 $color-text--main: #ffffff;
 $color-text--second: #d1d1d1;
+$color-text--third: #aaaaaa;
 
 $background-color--main: #181a20;
 $background-color--dark: #090a0d;
@@ -29,6 +30,12 @@ body {
 	background-color: $background-color--main;
 }
 
+#root {
+	display: grid;
+	min-height: 100%;
+	grid-template-rows: auto 1fr auto;
+}
+
 .container {
 	max-width: 1248px;
 	margin: 0 auto;
@@ -41,6 +48,7 @@ body {
 }
 main {
 	margin: 60px 0;
+	// position: relative;
 }
 
 .btn {
@@ -60,9 +68,15 @@ main {
 .btn--outline {
 	background: inherit;
 	border: 1px solid $color-main;
+	transition: all 0.3s ease;
+	
+	&:hover {
+		background: $color-main;
+	}
 }
 
 @import './scss/header.scss';
+@import './scss/auth.scss';
 @import './scss/form.scss';
 @import './scss/sets-page.scss';
 @import './scss/detailSet-about.scss';

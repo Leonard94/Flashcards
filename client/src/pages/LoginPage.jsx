@@ -1,79 +1,34 @@
-import { Navigate } from 'react-router-dom'
-import { useDispatch, useSelector } from 'react-redux'
+import { useState } from 'react'
 
-import { useForm } from 'react-hook-form'
-
-import { login } from '../store/user/user-actions'
-import { selectAllInfo } from '../store/user/user-selectors'
+import { Auth } from '../components/Login/Auth'
+import { Register } from '../components/Login/Register'
 
 export function LoginPage() {
-	const dispatch = useDispatch()
-	const { error, loading, email: user } = useSelector(selectAllInfo)
-
-	const {
-		register,
-		handleSubmit,
-		formState: { errors, isValid },
-	} = useForm({ mode: 'all' })
-
-	const onSubmit = (data) => {
-		const { mail: email, password } = data
-		dispatch(login({ email, password }))
-	}
-
-	if (user) {
-		return <Navigate to={'/'} />
-	}
+	const [isRegister, setIsRegister] = useState(false)
 
 	return (
-		<>
-			<h2>Войти в систему</h2>
+		<div className='auth'>
+			<div className='auth__container'>
+				<div className='auth__btn-row'>
+					<button
+						className={`auth__btn ${!isRegister && 'auth__btn--active'}`}
+						onClick={() => setIsRegister(false)}
+					>
+						Войти
+					</button>
 
-			<form onSubmit={handleSubmit(onSubmit)}>
-				<label>
-					Почта
-					<input
-						placeholder='Введите почту'
-						{...register('mail', {
-							required: 'Это обязательное поле',
-							minLength: {
-								value: 5,
-								message: 'Минимальная длина поля 5 символов',
-							},
-							pattern: {
-								value: /^(([^<>()[\]\\.,;:\s@"]+(\.[^<>()[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/,
-								message: 'Введите корректную почту',
-							},
-						})}
-					/>
-					{/* Зарефакторить код ниже */}
-					<small>{errors?.mail && errors.mail.message}</small>
-					{error && <small>{error}</small>}
-				</label>
-
-				<section>
-					<label>Пароль</label>
-					<input
-						type='password'
-						placeholder='Введите ваш пароль'
-						maxLength='25'
-						{...register('password', {
-							required: 'Это обязательное поле',
-							minLength: {
-								value: 5,
-								message: 'Минимальная длина поля 5 символов',
-							},
-						})}
-					/>
-					{/* Зарефакторить код ниже */}
-					<small>{errors?.password && errors.password.message}</small>
-					{error && <small>{error}</small>}
+					<button
+						className={`auth__btn ${isRegister && 'auth__btn--active'}`}
+						onClick={() => setIsRegister(true)}
+					>
+						Регистрация
+					</button>
+				</div>
+				<section className='auth-form__body'>
+					{!isRegister && <Auth />}
+					{isRegister && <Register />}
 				</section>
-
-				<button type='submit' disabled={!isValid}>
-					{loading ? 'Загрузка' : 'Войти'}{' '}
-				</button>
-			</form>
-		</>
+			</div>
+		</div>
 	)
 }

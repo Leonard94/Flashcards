@@ -4,7 +4,6 @@ import { useDispatch, useSelector } from 'react-redux'
 
 import { HomePage } from './pages/HomePage'
 import { LoginPage } from './pages/LoginPage'
-import { RegisterPage } from './pages/RegisterPage'
 import { SetsPage } from './pages/SetsPage'
 
 import { Header } from './components/Header'
@@ -44,7 +43,7 @@ function App() {
 						element={userEmail ? <SetsPage /> : <HomePage />}
 					/>
 					<Route path='/login' element={<LoginPage />} />
-					<Route path='/register' element={<RegisterPage />} />
+					<Route path='/register' element={<LoginPage />} />
 					<Route path='/:setId' element={<SetDetailPage />} />
 				</Routes>
 			</main>

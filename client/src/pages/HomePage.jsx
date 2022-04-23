@@ -1,3 +1,7 @@
 export function HomePage() {
-    return <h2>Эту страницу видно, если юзер не авторизован</h2>
+	return (
+		<div className='container'>
+			<h2>Эту страницу видно, если юзер не авторизован</h2>
+		</div>
+	)
 }

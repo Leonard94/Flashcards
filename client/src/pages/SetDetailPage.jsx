@@ -10,10 +10,11 @@ import { getTheSet } from '../store/set/set-actions'
 import { selectCurrentSet } from '../store/set/set-selectors'
 
 export function SetDetailPage() {
-	const dispatch = useDispatch()
 	const { setId } = useParams()
+
+	const dispatch = useDispatch()
 	const { title, study: terms = [] } = useSelector(selectCurrentSet)
-	const [redirect, setRedirect] = useState(false) // При удалении набора
+	const [redirect, setRedirect] = useState(false) // Если удаляем набор - редирект на главную
 	const [addTermMode, setAddTermMode] = useState(false)
 
 	useEffect(() => {
