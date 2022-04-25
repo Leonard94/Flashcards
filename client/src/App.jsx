@@ -1,5 +1,5 @@
 import { Routes, Route } from 'react-router-dom'
-import { useEffect } from 'react'
+import { useEffect, useState } from 'react'
 import { useDispatch, useSelector } from 'react-redux'
 
 import { HomePage } from './pages/HomePage'
@@ -16,6 +16,8 @@ import { SetDetailPage } from './pages/SetDetailPage'
 function App() {
 	const dispatch = useDispatch()
 
+	const [loginIsOpen, setLoginPageIsOpen] = useState(false)
+
 	const { email: userEmail, name: userName } = useSelector(selectCurrentUser)
 
 	useEffect(() => {
@@ -29,12 +31,23 @@ function App() {
 		dispatch(logout())
 	}
 
+	// Если открыта страница авторизации\регистрации
+	if (loginIsOpen) {
+		// Если пользователь авторизован
+		if (userEmail !== null) {
+			// Закрыть страницу авторизации/регистрации
+			setLoginPageIsOpen(false)
+		}
+		return <LoginPage setLoginPageIsOpen={setLoginPageIsOpen} />
+	}
+
 	return (
 		<>
 			<Header
 				userEmail={userEmail}
 				userName={userName}
 				logout={logoutHandler}
+				setLoginPageIsOpen={setLoginPageIsOpen}
 			/>
 			<main>
 				<Routes>
@@ -42,8 +55,7 @@ function App() {
 						path='/'
 						element={userEmail ? <SetsPage /> : <HomePage />}
 					/>
-					<Route path='/login' element={<LoginPage />} />
-					{/* <Route path='/register' element={<LoginPage />} /> */}
+					{/* <Route path='/login' element={<LoginPage />} /> */}
 					<Route path='/:setId' element={<SetDetailPage />} />
 				</Routes>
 			</main>

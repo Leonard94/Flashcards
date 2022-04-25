@@ -1,70 +1,70 @@
 .header {
-    background: $background-color--dark;
-    color: $color-text--main;
+	background: $background-color--dark;
+	color: $color-text--main;
 }
 
 .header__inner {
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-    height: 70px;
+	display: flex;
+	justify-content: space-between;
+	align-items: center;
+	height: 70px;
 }
 
 .header__logo {
-    font-size: 30px;
-    color: white;
+	font-size: 30px;
+	color: white;
 }
 
 .header__auth {
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
+	display: flex;
+	justify-content: space-between;
+	align-items: center;
 
-    .header-auth__user {
-        display: flex;
-        align-items: center;
-        justify-content: space-between;
-        flex-direction: column;
-        span {
-            color: $color-text--main;
-            font-weight: 400;
-            font-size: 12px;
-            line-height: 100%;
-            margin-top: 5px;
-        }
-    }
-    // !
-    .header-auth__login {
-        a {
-            padding: 10px;
-            border: 1px solid black;
-        }
-    }
-    .header-auth__register {
-        a {
-            padding: 10px;
-            background: orange;
-        }
-    }
+	.header-auth__user {
+		display: flex;
+		align-items: center;
+		justify-content: space-between;
+		flex-direction: column;
+		span {
+			color: $color-text--main;
+			font-weight: 400;
+			font-size: 12px;
+			line-height: 100%;
+			margin-top: 5px;
+		}
+	}
+
+	button {
+		&:first-child {
+			margin-right: 15px;
+		}
+	}
+	// !
+	.header-auth__login {
+		a {
+			padding: 10px;
+			border: 1px solid black;
+		}
+	}
 }
 
 .menu {
-    display: flex;
-    justify-content: space-between;
+	display: flex;
+	justify-content: space-between;
 }
 
 .menu__list {
-    display: flex;
-    justify-content: space-between;
-    li {
-        a {
-            font-size: 16px;
-            font-weight: 300;
-            color: $color-text--main;
-            transition: color 0.3s ease;
-            &:hover {
-                color: $color-main;
-            }
-        }
-    }
+	display: flex;
+	justify-content: space-between;
+	li {
+		a {
+			font-size: 16px;
+			font-weight: 300;
+			color: $color-text--main;
+			transition: color 0.3s ease;
+			&:hover {
+				color: $color-main;
+			}
+		}
+	}
 }

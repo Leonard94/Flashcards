@@ -1,18 +1,15 @@
 import { useState } from 'react'
 import { useSelector } from 'react-redux'
-import { Navigate } from 'react-router-dom'
 
 import { Auth } from '../components/Login/Auth'
 import { Register } from '../components/Login/Register'
 import { selectAllInfo } from '../store/user/user-selectors'
 
-export function LoginPage() {
-	const [isRegister, setIsRegister] = useState(false)
-	const { error, loading, email: user } = useSelector(selectAllInfo)
+import iconClose from '../assets/icon/icon__close.svg'
 
-	if (user) {
-		return <Navigate to={'/'} />
-	}
+export function LoginPage({ setLoginPageIsOpen }) {
+	const [isRegister, setIsRegister] = useState(false)
+	const { error, loading } = useSelector(selectAllInfo)
 
 	return (
 		<div className='auth'>
@@ -31,11 +28,26 @@ export function LoginPage() {
 					>
 						Регистрация
 					</button>
+
+					<img
+						className='auth__close'
+						onClick={() => setLoginPageIsOpen(false)}
+						src={iconClose}
+						alt='close register page'
+						title='Закрыть окно регистрации/авторизации'
+					/>
 				</div>
 				<section className='auth-form__body'>
-					{!isRegister && <Auth error={error} loading={loading} />}
+					{!isRegister && (
+						<Auth
+							setLoginPageIsOpen={setLoginPageIsOpen}
+							error={error}
+							loading={loading}
+						/>
+					)}
 					{isRegister && (
 						<Register
+							setLoginPageIsOpen={setLoginPageIsOpen}
 							error={error}
 							loading={loading}
 							setIsRegister={setIsRegister}

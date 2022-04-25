@@ -31,6 +31,9 @@ export const checkIsAuthUser = () => (dispatch) => {
 		.then((response) => {
 			dispatch(setUser(response.data.email, response.data.name))
 		})
+		.catch((err) => {
+			// console.log('Пользователь не авторизован')
+		})
 }
 
 export const login = (data) => (dispatch) => {

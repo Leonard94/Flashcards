@@ -3,14 +3,14 @@ import { useDispatch } from 'react-redux'
 
 import { login } from '../../store/user/user-actions'
 
-export function Auth({ error, loading }) {
+export function Auth({ error, loading, setLoginPageIsOpen }) {
+	const dispatch = useDispatch()
+
 	const {
 		register,
 		handleSubmit,
 		formState: { errors, isValid },
 	} = useForm({ mode: 'all' })
-
-	const dispatch = useDispatch()
 
 	const onSubmit = (data) => {
 		const { mail: email, password } = data
@@ -59,7 +59,11 @@ export function Auth({ error, loading }) {
 			</section>
 
 			<div className='auth-form__btn-row'>
-				<button className='btn btn--solid' type='submit' disabled={!isValid || loading}>
+				<button
+					className='btn btn--solid'
+					type='submit'
+					disabled={!isValid || loading}
+				>
 					{loading ? 'Загрузка' : 'Войти'}
 				</button>
 			</div>
