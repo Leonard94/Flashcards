@@ -1,3 +1,5 @@
+import { declination } from '../../helpres'
+
 import { EditSet } from './EditSet'
 
 export function DetailAbout(props) {
@@ -15,7 +17,7 @@ export function DetailAbout(props) {
 			<div className='detail__about-left'>
 				<EditSet title={title} id={setId} setRedirect={setRedirect} />
 				<div className='detail__about-allcounter'>
-					{lengthOfSet} терминов
+					{lengthOfSet} {declination(lengthOfSet)}
 				</div>
 			</div>
 			<div className='detail__about-right'>
