@@ -1,21 +1,25 @@
 .dropdown {
 	position: relative;
 	display: inline-block;
+	z-index: 0;
+
 	.dropdown__img {
 		position: relative;
 		max-width: 25px;
 		top: -4px;
 		transition: all 0.3s ease;
+
 		&:hover {
 			transform: rotate(45deg);
 		}
 	}
 }
+
 .dropdown__body {
 	position: absolute;
-	top: 20px;
+	top: -5px;
 	left: 0;
-	z-index: 10;
+	z-index: 20;
 
 	border-radius: 5px;
 
@@ -42,6 +46,46 @@
 
 		img {
 			max-width: 18px;
+			margin-right: 10px;
+			position: relative;
+			top: -1px;
+		}
+	}
+}
+
+.dropdown2 {
+	position: absolute;
+	top: 0;
+	right: 0;
+	z-index: 10;
+}
+
+.dropdown2__body {
+	border-radius: 5px;
+
+	font-size: 14px;
+	font-weight: 300;
+	line-height: 140%;
+
+	box-shadow: 1px 2px 20px 5px rgba(0, 0, 0, 0.2);
+	background: $background-color--light;
+
+	li {
+		display: flex;
+		padding: 15px 20px;
+		cursor: pointer;
+		transition: all 0.3s ease;
+
+		&:last-child {
+			margin-bottom: 0;
+		}
+
+		&:hover {
+			background: $background-color--main;
+		}
+
+		img {
+			max-width: 25px;
 			margin-right: 10px;
 			position: relative;
 			top: -1px;

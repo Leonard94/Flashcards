@@ -51,7 +51,6 @@ export const deleteTheSet = (setId) => async (dispatch) => {
 
 // Добавляем новый термин в набор
 export const addNewTermToTheSet = (data) => async (dispatch) => {
-	console.log('addNewTerm = set actions')
 	return axios
 		.put(`http://localhost:5000/sets/set/add-new-word`, data, {
 			withCredentials: true,

@@ -1,7 +1,7 @@
 import { useEffect, useState, useRef } from 'react'
 
-import iconSettings from '../../assets/icon/icon-settings.svg'
-import iconEdit from '../../assets/icon/icon-edit2.svg'
+import iconSettings from '../../assets/icon/icon__settings.svg'
+import iconEdit from '../../assets/icon/icon__edit.svg'
 import iconRemove from '../../assets/icon/icon__remove.svg'
 
 export function DropdownEditSet({ setEditModeForTitle, deleteSetHandle }) {

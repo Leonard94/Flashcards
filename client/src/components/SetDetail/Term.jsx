@@ -2,14 +2,17 @@ import { useState } from 'react'
 import { useDispatch } from 'react-redux'
 
 import { getTheSet, removeTheTerm, renameTheTerm } from '../../store/set/set-actions'
-import iconDetail from '../../assets/icon/icon-detail.svg'
-import iconRemove from '../../assets/icon/icon__remove.svg'
+
+import iconDetail from '../../assets/icon/icon__detail.svg'
 import iconCompleted from '../../assets/icon/icon__completed.svg'
+import iconClose from '../../assets/icon/icon__close.svg'
+
+import { DropDownEditTerm } from './DropDownEditTerm'
 
 export function Term({ front, back, setId, _id: termId, toggleCompleted }) {
-	const [editMode, setEditMode] = useState(false)
 	const [localFront, setLocalFront] = useState(front)
 	const [localBack, setLocalBack] = useState(back)
+	const [editMode, setEditMode] = useState(false)
 	const [isOpenMenu, setIsOpenMenu] = useState(false)
 
 	const dispatch = useDispatch()
@@ -34,6 +37,7 @@ export function Term({ front, back, setId, _id: termId, toggleCompleted }) {
 		}
 	}
 	const deleteTheTerm = () => {
+		setIsOpenMenu(false)
 		const data = { setId, termId }
 		dispatch(removeTheTerm(data)).then(() => {
 			dispatch(getTheSet(setId))
@@ -41,19 +45,32 @@ export function Term({ front, back, setId, _id: termId, toggleCompleted }) {
 		})
 	}
 
+	const toggleCompletedTheTerm = () => {
+		toggleCompleted(termId)
+		setIsOpenMenu(false)
+	}
+
 	return (
 		<li className='term'>
-			<button onClick={() => toggleCompleted(termId)}>toggle</button>
+			{isOpenMenu && (
+				<DropDownEditTerm
+					setIsOpenMenu={setIsOpenMenu}
+					toggleEditMode={toggleEditMode}
+					deleteTheTerm={deleteTheTerm}
+					toggleCompletedTheTerm={toggleCompletedTheTerm}
+				/>
+			)}
+
 			<div className={`term__body ${editMode ? 'term__body--editmode' : ''}`}>
 				{!editMode && (
 					<div className='term__item'>
 						<div className='term-item__front'>{front}</div>
 						<div className='term-item__back'>{back}</div>
 						<img
+							onClick={setIsOpenMenu}
 							className='term-item__img'
 							src={iconDetail}
 							alt='detail'
-							onClick={toggleEditMode}
 						/>
 					</div>
 				)}
@@ -84,10 +101,10 @@ export function Term({ front, back, setId, _id: termId, toggleCompleted }) {
 				)}
 			</div>
 			<div className='term__btn-row'>
-				<button className='term-btn' onClick={deleteTheTerm}>
+				<button className='term-btn' onClick={() => toggleEditMode()}>
 					<img
 						className='term-item__input-img'
-						src={iconRemove}
+						src={iconClose}
 						alt='detail'
 					/>
 				</button>

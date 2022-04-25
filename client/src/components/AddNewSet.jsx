@@ -2,7 +2,7 @@ import { useState } from 'react'
 import { useDispatch } from 'react-redux'
 
 import { getSetsList, addNewSet } from '../store/sets/sets-actions'
-import addIcon from '../assets/icon/icon-add.svg'
+import addIcon from '../assets/icon/icon__add.svg'
 
 export function AddNewSet() {
 	const dispatch = useDispatch()
