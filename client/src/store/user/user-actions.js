@@ -26,6 +26,7 @@ const setLoading = (boolean) => ({
 })
 
 export const checkIsAuthUser = () => (dispatch) => {
+	console.log('Проверка авторизации')
 	axios
 		.get('http://localhost:5000/user', { withCredentials: true })
 		.then((response) => {
@@ -65,6 +66,7 @@ export const registerNewUser = (data) => (dispatch) => {
 }
 
 export const logout = () => (dispatch) => {
+	console.log('Выйти с аккаунта')
 	dispatch(setLoading(true))
 	axios
 		.post('http://localhost:5000/user/logout', {}, { withCredentials: true })

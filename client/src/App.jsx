@@ -10,7 +10,7 @@ import { Header } from './components/Header'
 import { Footer } from './components/Footer'
 
 import { checkIsAuthUser, logout } from './store/user/user-actions'
-import { selectCurrentUser } from './store/user/user-selectors'
+import { selectCurrentUser, userIsLoading } from './store/user/user-selectors'
 import { SetDetailPage } from './pages/SetDetailPage'
 
 function App() {
@@ -18,13 +18,17 @@ function App() {
 
 	const [loginIsOpen, setLoginPageIsOpen] = useState(false)
 
+	const isLoading = useSelector(userIsLoading)
+
 	const { email: userEmail, name: userName } = useSelector(selectCurrentUser)
 
 	useEffect(() => {
-		if (userEmail === null) {
+		// Пользователь авторизован?
+		if (userEmail === null && !isLoading) {
+			// Если userEmail пустой и нет загрузки, касающейся пользователя
 			dispatch(checkIsAuthUser())
 		}
-	}, [userEmail, dispatch])
+	})
 
 	// Выйти из системы
 	const logoutHandler = () => {
