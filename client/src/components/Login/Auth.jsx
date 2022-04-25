@@ -1,14 +1,20 @@
 import { useForm } from 'react-hook-form'
+import { useDispatch } from 'react-redux'
 
-export function Auth({ loading = true }) {
+import { login } from '../../store/user/user-actions'
+
+export function Auth({ error, loading }) {
 	const {
 		register,
 		handleSubmit,
 		formState: { errors, isValid },
 	} = useForm({ mode: 'all' })
 
-	const onSubmit = () => {
-		console.log('submit')
+	const dispatch = useDispatch()
+
+	const onSubmit = (data) => {
+		const { mail: email, password } = data
+		dispatch(login({ email, password }))
 	}
 
 	return (
@@ -18,7 +24,7 @@ export function Auth({ loading = true }) {
 				<input
 					type='email'
 					placeholder='poliglot@gmail.com'
-					{...register('email', {
+					{...register('mail', {
 						required: 'Это обязательное поле',
 						minLength: {
 							value: 5,
@@ -30,9 +36,8 @@ export function Auth({ loading = true }) {
 						},
 					})}
 				/>
-				{/* Зарефакторить код ниже */}
 				<small>{errors?.mail && errors.mail.message}</small>
-				{/* {error && <small>{error}</small>} */}
+				{error && <small>{error}</small>}
 			</section>
 
 			<section className='auth-form__section'>
@@ -49,13 +54,12 @@ export function Auth({ loading = true }) {
 						},
 					})}
 				/>
-				{/* Зарефакторить код ниже */}
 				<small>{errors?.password && errors.password.message}</small>
-				{/* {error && <small>{error}</small>} */}
+				{error && <small>{error}</small>}
 			</section>
 
 			<div className='auth-form__btn-row'>
-				<button className='btn btn--solid' type='submit' disabled={!isValid}>
+				<button className='btn btn--solid' type='submit' disabled={!isValid || loading}>
 					{loading ? 'Загрузка' : 'Войти'}
 				</button>
 			</div>

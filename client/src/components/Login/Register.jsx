@@ -1,6 +1,11 @@
 import { useForm } from 'react-hook-form'
+import { useDispatch } from 'react-redux'
 
-export function Register({ loading = false }) {
+import { registerNewUser } from '../../store/user/user-actions'
+
+export function Register({ error, loading, setIsRegister }) {
+	const dispatch = useDispatch()
+
 	const {
 		register,
 		handleSubmit,
@@ -9,8 +14,9 @@ export function Register({ loading = false }) {
 		getValues,
 	} = useForm({ mode: 'all' })
 
-	const onSubmit = () => {
-		console.log('onSubmit')
+	const onSubmit = (data) => {
+		const { name, mail: email, password } = data
+		dispatch(registerNewUser({ name, email, password }))
 	}
 
 	return (
@@ -29,13 +35,13 @@ export function Register({ loading = false }) {
 						},
 					})}
 				/>
-				{/* {error && <small>{error}</small>} */}
 				<small>{errors?.name && errors.name.message}</small>
 			</section>
 
 			<section className='auth-form__section'>
 				<label>Почта</label>
 				<input
+					type='email'
 					placeholder='poliglot@gmail.com'
 					{...register('mail', {
 						required: 'Это обязательное поле',
@@ -49,6 +55,7 @@ export function Register({ loading = false }) {
 						},
 					})}
 				/>
+				{error && <small>{error}</small>}
 				<small>{errors?.mail && errors.mail.message}</small>
 			</section>
 
@@ -102,10 +109,18 @@ export function Register({ loading = false }) {
 			</section>
 
 			<div className='auth-form__btn-row'>
-				<button className='btn btn--solid' type='submit' disabled={!isValid}>
+				<button
+					className='btn btn--solid'
+					type='submit'
+					disabled={!isValid || loading}
+				>
 					{loading ? 'Загрузка' : 'Зарегистрироваться'}
 				</button>
-				<button className='btn btn--outline' type='submit'>
+				<button
+					onClick={() => setIsRegister(false)}
+					className='btn btn--outline'
+					type='submit'
+				>
 					Уже есть учётная запись? <span>Войдите</span>
 				</button>
 			</div>

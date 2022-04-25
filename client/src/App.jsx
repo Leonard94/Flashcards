@@ -19,7 +19,7 @@ function App() {
 	const { email: userEmail, name: userName } = useSelector(selectCurrentUser)
 
 	useEffect(() => {
-		if (!userEmail) {
+		if (userEmail === null) {
 			dispatch(checkIsAuthUser())
 		}
 	}, [userEmail, dispatch])
@@ -43,7 +43,7 @@ function App() {
 						element={userEmail ? <SetsPage /> : <HomePage />}
 					/>
 					<Route path='/login' element={<LoginPage />} />
-					<Route path='/register' element={<LoginPage />} />
+					{/* <Route path='/register' element={<LoginPage />} /> */}
 					<Route path='/:setId' element={<SetDetailPage />} />
 				</Routes>
 			</main>
