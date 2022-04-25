@@ -16,8 +16,8 @@ import { SetDetailPage } from './pages/SetDetailPage'
 function App() {
 	const dispatch = useDispatch()
 
-	const [loginIsOpen, setLoginPageIsOpen] = useState(false)
-	const [isRegister, setIsRegister] = useState(false)
+	const [loginIsOpen, setLoginPageIsOpen] = useState(false) // Открыта ли страницы входа/регистрации
+	const [isRegister, setIsRegister] = useState(false) // В хедере нажата кнопка войти или регистрации - чтобы открыть соответствующее окно
 
 	const {
 		email: userEmail,
@@ -27,19 +27,14 @@ function App() {
 	} = useSelector(selectAllInfoAboutUser)
 
 	useEffect(() => {
-		// Пользователь авторизован?
+		// Проверяем авторизован ли пользователь
 		if (userEmail === null && !loading) {
 			// Если userEmail пустой и нет загрузки, касающейся пользователя
 			dispatch(checkIsAuthUser())
 		}
 	})
 
-	// Выйти из системы
-	const logoutHandler = () => {
-		dispatch(logout())
-	}
-
-	// Если открыта страница авторизации\регистрации
+	// Если нажато открыть страницу авторизации\регистрации
 	if (loginIsOpen) {
 		// Если пользователь авторизован
 		if (userEmail !== null) {
@@ -52,6 +47,7 @@ function App() {
 				error={error}
 				loading={loading}
 				isRegister={isRegister}
+				setIsRegister={setIsRegister}
 			/>
 		)
 	}
@@ -61,7 +57,7 @@ function App() {
 			<Header
 				userEmail={userEmail}
 				userName={userName}
-				logout={logoutHandler}
+				logout={() => dispatch(logout())}
 				setLoginPageIsOpen={setLoginPageIsOpen}
 				setIsRegister={setIsRegister}
 				isRegister={isRegister}
