@@ -1,15 +1,10 @@
-import { useState } from 'react'
-import { useSelector } from 'react-redux'
-
 import { Auth } from '../components/Login/Auth'
 import { Register } from '../components/Login/Register'
-import { selectAllInfo } from '../store/user/user-selectors'
 
 import iconClose from '../assets/icon/icon__close.svg'
 
-export function LoginPage({ setLoginPageIsOpen }) {
-	const [isRegister, setIsRegister] = useState(false)
-	const { error, loading } = useSelector(selectAllInfo)
+export function LoginPage(props) {
+	const { setLoginPageIsOpen, setIsRegister, isRegister, error, loading } = props
 
 	return (
 		<div className='auth'>
@@ -38,16 +33,9 @@ export function LoginPage({ setLoginPageIsOpen }) {
 					/>
 				</div>
 				<section className='auth-form__body'>
-					{!isRegister && (
-						<Auth
-							setLoginPageIsOpen={setLoginPageIsOpen}
-							error={error}
-							loading={loading}
-						/>
-					)}
+					{!isRegister && <Auth error={error} loading={loading} />}
 					{isRegister && (
 						<Register
-							setLoginPageIsOpen={setLoginPageIsOpen}
 							error={error}
 							loading={loading}
 							setIsRegister={setIsRegister}

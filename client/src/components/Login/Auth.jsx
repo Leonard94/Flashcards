@@ -3,7 +3,7 @@ import { useDispatch } from 'react-redux'
 
 import { login } from '../../store/user/user-actions'
 
-export function Auth({ error, loading, setLoginPageIsOpen }) {
+export function Auth({ error, loading }) {
 	const dispatch = useDispatch()
 
 	const {

@@ -10,21 +10,25 @@ import { Header } from './components/Header'
 import { Footer } from './components/Footer'
 
 import { checkIsAuthUser, logout } from './store/user/user-actions'
-import { selectCurrentUser, userIsLoading } from './store/user/user-selectors'
+import { selectAllInfoAboutUser } from './store/user/user-selectors'
 import { SetDetailPage } from './pages/SetDetailPage'
 
 function App() {
 	const dispatch = useDispatch()
 
 	const [loginIsOpen, setLoginPageIsOpen] = useState(false)
+	const [isRegister, setIsRegister] = useState(false)
 
-	const isLoading = useSelector(userIsLoading)
-
-	const { email: userEmail, name: userName } = useSelector(selectCurrentUser)
+	const {
+		email: userEmail,
+		name: userName,
+		loading,
+		error,
+	} = useSelector(selectAllInfoAboutUser)
 
 	useEffect(() => {
 		// Пользователь авторизован?
-		if (userEmail === null && !isLoading) {
+		if (userEmail === null && !loading) {
 			// Если userEmail пустой и нет загрузки, касающейся пользователя
 			dispatch(checkIsAuthUser())
 		}
@@ -42,7 +46,14 @@ function App() {
 			// Закрыть страницу авторизации/регистрации
 			setLoginPageIsOpen(false)
 		}
-		return <LoginPage setLoginPageIsOpen={setLoginPageIsOpen} />
+		return (
+			<LoginPage
+				setLoginPageIsOpen={setLoginPageIsOpen}
+				error={error}
+				loading={loading}
+				isRegister={isRegister}
+			/>
+		)
 	}
 
 	return (
@@ -52,6 +63,8 @@ function App() {
 				userName={userName}
 				logout={logoutHandler}
 				setLoginPageIsOpen={setLoginPageIsOpen}
+				setIsRegister={setIsRegister}
+				isRegister={isRegister}
 			/>
 			<main>
 				<Routes>
@@ -59,7 +72,6 @@ function App() {
 						path='/'
 						element={userEmail ? <SetsPage /> : <HomePage />}
 					/>
-					{/* <Route path='/login' element={<LoginPage />} /> */}
 					<Route path='/:setId' element={<SetDetailPage />} />
 				</Routes>
 			</main>

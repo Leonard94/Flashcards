@@ -3,7 +3,7 @@ import { useDispatch } from 'react-redux'
 
 import { registerNewUser } from '../../store/user/user-actions'
 
-export function Register({ error, loading, setIsRegister, setLoginPageIsOpen }) {
+export function Register({ error, loading, setIsRegister }) {
 	const dispatch = useDispatch()
 
 	const {

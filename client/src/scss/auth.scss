@@ -1,12 +1,24 @@
 .auth {
 	position: absolute;
 	top: 0;
-	left: 0;
+	right: 0;
 
 	width: 100%;
 	height: 100%;
 
 	background: $background-color--main;
+
+	animation-duration: 0.3s;
+	animation-name: auth;
+}
+
+@keyframes auth {
+	0% {
+		top: -1000px;
+	}
+	to {
+		top: 0;
+	}
 }
 
 .auth__container {
@@ -18,6 +30,7 @@
 .auth__btn-row {
 	margin-bottom: 20px;
 	display: flex;
+	padding-left: 10px;
 }
 
 .auth__close {
@@ -98,6 +111,13 @@
 		display: block;
 	}
 
+	input:-webkit-autofill,
+	input:-webkit-autofill:hover,
+	input:-webkit-autofill:focus {
+		-webkit-text-fill-color: $color-text--main;
+		transition: background-color 5000s ease-in-out 0s;
+	}
+
 	input:not(.auth-form__checkbox-row input) {
 		display: block;
 		height: 40px;
@@ -115,6 +135,7 @@
 		&:focus {
 			border-color: $color-main;
 		}
+
 		&::placeholder {
 			font-size: 14px;
 			font-weight: 300;
