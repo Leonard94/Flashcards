@@ -1,9 +1,9 @@
-import { useEffect, useState, useRef } from 'react'
+import { useState } from 'react'
 import { useDispatch } from 'react-redux'
 
 import { DropdownEditSet } from './DropdownEditSet'
 
-import { deleteTheSet, getTheSet, renameTheSet } from '../../store/set/set-actions'
+import { deleteTheSet, renameTheSet } from '../../store/set/set-actions'
 import { getSetsList } from '../../store/sets/sets-actions'
 
 export function EditSet({ title, id, setRedirect }) {
@@ -15,10 +15,9 @@ export function EditSet({ title, id, setRedirect }) {
 		e.preventDefault()
 
 		if (title !== name) {
-			// Если изменили название массива
+			// Если изменили название набора
 			const data = { setId: id, title: name }
 			dispatch(renameTheSet(data)).then(() => {
-				dispatch(getTheSet(id))
 				setEditModeForTitle(false)
 			})
 		} else {
@@ -28,7 +27,6 @@ export function EditSet({ title, id, setRedirect }) {
 
 	const deleteSetHandle = () => {
 		dispatch(deleteTheSet(id)).then(() => {
-			// После успешного удаления
 			setRedirect(true) // Редирект на страницу с наборами
 			dispatch(getSetsList) // Обновляем список наборов
 		})
@@ -55,6 +53,7 @@ export function EditSet({ title, id, setRedirect }) {
 					/>
 					<span>
 						<button
+							type='button'
 							className='detail__about-btn detail__about-btn--back'
 							onClick={() => {
 								setEditModeForTitle(false)

@@ -22,24 +22,25 @@ export function SetDetailPage() {
 		dispatch(getTheSet(setId))
 	}, [setId, dispatch])
 
-	const study = terms.filter((term) => !term.completed) // На изучении
+	const study = terms.filter((term) => !term.completed).reverse() // На изучении
 	const completed = terms.filter((term) => term.completed) // Изучены
 
-	// Переключить режим добавления нового термина
+	// Переключить режим добавления термина
 	const toggleAddNewTermMode = () => {
 		setAddTermMode(!addTermMode)
 	}
 
-	// Функция переклчюения выполнения термина
+	// Переключить выполнение термина
 	const toggleCompleted = (termId) => {
 		const data = { setId, termId }
-		console.log('toggle!')
 		dispatch(toggleCompletedTheTerm(data))
 	}
 
 	if (redirect) {
 		return <Navigate to={'/'} />
-	} else if (title) {
+	}
+
+	if (title) {
 		return (
 			<div className='container--small'>
 				<div className='detail'>

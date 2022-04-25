@@ -19,7 +19,7 @@ const setError = (error) => ({
 	payload: error,
 })
 
-// Получаем все наборы пользователя
+// Получаем набор пользователя
 export const getTheSet = (setId) => async (dispatch) => {
 	axios
 		.get(`http://localhost:5000/sets/set/${setId}`, { withCredentials: true })
@@ -73,6 +73,7 @@ export const renameTheSet = (data) => async (dispatch) => {
 		})
 		.then((response) => {
 			// Если бы сервер возвращал актуальную версию текущего набора, можно было сразу диспачить отсюда
+			dispatch(getTheSet(data.setId))
 		})
 		.catch((err) => {
 			console.log(err.response)

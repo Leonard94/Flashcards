@@ -19,7 +19,6 @@ export function AddNewSet() {
 	}
 
 	const toggleAddMode = () => {
-		console.log('toggleAddMode')
 		setAddMode(!addMode)
 	}
 
