@@ -6,7 +6,7 @@ import { DetailAbout } from '../components/SetDetail/DetailAbout'
 import { AddNewTerm } from '../components/SetDetail/AddNewTerm'
 import { TermList } from '../components/SetDetail/TermList'
 
-import { getTheSet } from '../store/set/set-actions'
+import { getTheSet, toggleCompletedTheTerm } from '../store/set/set-actions'
 import { selectCurrentSet } from '../store/set/set-selectors'
 
 export function SetDetailPage() {
@@ -30,6 +30,13 @@ export function SetDetailPage() {
 		setAddTermMode(!addTermMode)
 	}
 
+	// Функция переклчюения выполнения термина
+	const toggleCompleted = (termId) => {
+		const data = { setId, termId }
+		console.log('toggle!')
+		dispatch(toggleCompletedTheTerm(data))
+	}
+
 	if (redirect) {
 		return <Navigate to={'/'} />
 	} else if (title) {
@@ -50,13 +57,22 @@ export function SetDetailPage() {
 					)}
 
 					{study.length ? (
-						<TermList list={study} setId={setId} study={true} />
+						<TermList
+							list={study}
+							setId={setId}
+							study={true}
+							toggleCompleted={toggleCompleted}
+						/>
 					) : (
 						'Добавить новый термин'
 					)}
 
 					{completed.length ? (
-						<TermList list={completed} setId={setId} />
+						<TermList
+							list={completed}
+							setId={setId}
+							toggleCompleted={toggleCompleted}
+						/>
 					) : null}
 				</div>
 			</div>

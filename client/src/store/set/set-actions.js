@@ -109,3 +109,18 @@ export const removeTheTerm = (data) => async (dispatch) => {
 			setError(err.response)
 		})
 }
+
+// Удаляем термин
+export const toggleCompletedTheTerm = (data) => async (dispatch) => {
+	return axios
+		.put(`http://localhost:5000/sets/set/term/toggle-completed`, data, {
+			withCredentials: true,
+		})
+		.then((response) => {
+			dispatch(getTheSet(data.setId))
+		})
+		.catch((err) => {
+			console.log(err.response)
+			setError(err.response)
+		})
+}

@@ -6,7 +6,7 @@ import iconDetail from '../../assets/icon/icon-detail.svg'
 import iconRemove from '../../assets/icon/icon__remove.svg'
 import iconCompleted from '../../assets/icon/icon__completed.svg'
 
-export function Term({ front, back, setId, _id: termId }) {
+export function Term({ front, back, setId, _id: termId, toggleCompleted }) {
 	const [editMode, setEditMode] = useState(false)
 	const [localFront, setLocalFront] = useState(front)
 	const [localBack, setLocalBack] = useState(back)
@@ -43,6 +43,7 @@ export function Term({ front, back, setId, _id: termId }) {
 
 	return (
 		<li className='term'>
+			<button onClick={() => toggleCompleted(termId)}>toggle</button>
 			<div className={`term__body ${editMode ? 'term__body--editmode' : ''}`}>
 				{!editMode && (
 					<div className='term__item'>

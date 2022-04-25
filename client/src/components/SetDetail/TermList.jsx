@@ -1,6 +1,6 @@
 import { Term } from './Term'
 
-export function TermList({ list, setId, study }) {
+export function TermList({ list, setId, study, toggleCompleted }) {
 	return (
 		<section
 			className={`detail__list ${
@@ -13,7 +13,12 @@ export function TermList({ list, setId, study }) {
 
 			<ul className='term-list'>
 				{list.map((term) => (
-					<Term key={term._id} setId={setId} {...term} />
+					<Term
+						key={term._id}
+						setId={setId}
+						{...term}
+						toggleCompleted={toggleCompleted}
+					/>
 				))}
 			</ul>
 		</section>
