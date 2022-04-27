@@ -17,10 +17,6 @@ export function Term({ front, back, setId, _id: termId, toggleCompleted }) {
 
 	const dispatch = useDispatch()
 
-	const toggleEditMode = () => {
-		setEditMode(!editMode)
-	}
-
 	const onSubmit = (e) => {
 		e.preventDefault()
 		if (front === localFront && back === localBack) {
@@ -34,6 +30,16 @@ export function Term({ front, back, setId, _id: termId, toggleCompleted }) {
 			})
 		}
 	}
+
+	const toggleEditMode = () => {
+		setEditMode(!editMode)
+	}
+
+	const editTheTerm = () => {
+		toggleEditMode()
+		setIsOpenMenu(false)
+	}
+
 	const deleteTheTerm = () => {
 		setIsOpenMenu(false)
 		const data = { setId, termId }
@@ -55,6 +61,7 @@ export function Term({ front, back, setId, _id: termId, toggleCompleted }) {
 					setIsOpenMenu={setIsOpenMenu}
 					toggleEditMode={toggleEditMode}
 					deleteTheTerm={deleteTheTerm}
+					editTheTerm={editTheTerm}
 					toggleCompletedTheTerm={toggleCompletedTheTerm}
 				/>
 			)}
@@ -68,6 +75,7 @@ export function Term({ front, back, setId, _id: termId, toggleCompleted }) {
 							onClick={setIsOpenMenu}
 							className='term-item__img'
 							src={iconDetail}
+							title='настроить термин'
 							alt='detail'
 						/>
 					</div>

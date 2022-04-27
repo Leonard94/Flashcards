@@ -5,7 +5,7 @@ import iconCompleted from '../../assets/icon/icon__completed.svg'
 import iconPen from '../../assets/icon/icon__pen.svg'
 
 export function DropDownEditTerm(props) {
-	const { setIsOpenMenu, toggleEditMode, deleteTheTerm, toggleCompletedTheTerm } =
+	const { setIsOpenMenu, editTheTerm, deleteTheTerm, toggleCompletedTheTerm } =
 		props
 
 	const menuRef = useRef()
@@ -17,11 +17,6 @@ export function DropDownEditTerm(props) {
 		}
 	}
 
-	const editTheTerm = () => {
-		setIsOpenMenu(false)
-		toggleEditMode()
-	}
-
 	useEffect(() => {
 		document.addEventListener('mousedown', handleOnClick)
 		return () => {
@@ -30,8 +25,8 @@ export function DropDownEditTerm(props) {
 	})
 
 	return (
-		<div className='dropdown2'>
-			<ul ref={menuRef} className='dropdown2__body'>
+		<div className='dropdown'>
+			<ul ref={menuRef} className='dropdown__body'>
 				<li onClick={editTheTerm}>
 					<img src={iconPen} alt='Переименовать' />
 					Редактировать термин
