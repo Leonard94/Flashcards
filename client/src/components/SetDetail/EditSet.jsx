@@ -1,10 +1,10 @@
 import { useState } from 'react'
 import { useDispatch } from 'react-redux'
 
-import { DropdownEditSet } from './DropdownEditSet'
-
 import { deleteTheSet, renameTheSet } from '../../store/set/set-actions'
 import { getSetsList } from '../../store/sets/sets-actions'
+
+import { DropdownEditSet } from './DropdownEditSet'
 
 export function EditSet({ title, id, setRedirect }) {
 	const dispatch = useDispatch()
@@ -27,8 +27,8 @@ export function EditSet({ title, id, setRedirect }) {
 
 	const deleteSetHandle = () => {
 		dispatch(deleteTheSet(id)).then(() => {
-			setRedirect(true) // Редирект на страницу с наборами
-			dispatch(getSetsList) // Обновляем список наборов
+			setRedirect(true)
+			dispatch(getSetsList)
 		})
 	}
 

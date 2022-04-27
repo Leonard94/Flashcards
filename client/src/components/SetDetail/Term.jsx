@@ -27,10 +27,8 @@ export function Term({ front, back, setId, _id: termId, toggleCompleted }) {
 			// Если ничего не изменилось, а нажали сохранить
 			toggleEditMode()
 		} else {
-			// Если что-то поменяли
 			const data = { setId, termId, front: localFront, back: localBack }
 			dispatch(renameTheTerm(data)).then(() => {
-				// Обновляем список терминов
 				dispatch(getTheSet(setId))
 				toggleEditMode()
 			})

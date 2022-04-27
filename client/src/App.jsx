@@ -5,9 +5,7 @@ import { useDispatch, useSelector } from 'react-redux'
 import { HomePage } from './pages/HomePage'
 import { LoginPage } from './pages/LoginPage'
 import { SetsPage } from './pages/SetsPage'
-
-import { Header } from './components/Header'
-import { Footer } from './components/Footer'
+import { Layout } from './components/Layout/Layout'
 
 import { checkIsAuthUser, logout } from './store/user/user-actions'
 import { selectAllInfoAboutUser } from './store/user/user-selectors'
@@ -16,8 +14,8 @@ import { SetDetailPage } from './pages/SetDetailPage'
 function App() {
 	const dispatch = useDispatch()
 
-	const [loginIsOpen, setLoginPageIsOpen] = useState(false) // Открыта ли страницы входа/регистрации
-	const [isRegister, setIsRegister] = useState(false) // В хедере нажата кнопка войти или регистрации - чтобы открыть соответствующее окно
+	const [loginIsOpen, setLoginPageIsOpen] = useState(false)
+	const [isRegister, setIsRegister] = useState(false)
 
 	const {
 		email: userEmail,
@@ -38,7 +36,6 @@ function App() {
 	if (loginIsOpen) {
 		// Если пользователь авторизован
 		if (userEmail !== null) {
-			// Закрыть страницу авторизации/регистрации
 			setLoginPageIsOpen(false)
 		}
 		return (
@@ -52,26 +49,30 @@ function App() {
 		)
 	}
 
+	const logoutHandler = () => {
+		dispatch(logout())
+	}
+
 	return (
 		<>
-			<Header
-				userEmail={userEmail}
-				userName={userName}
-				logout={() => dispatch(logout())}
-				setLoginPageIsOpen={setLoginPageIsOpen}
-				setIsRegister={setIsRegister}
-				isRegister={isRegister}
-			/>
-			<main>
-				<Routes>
-					<Route
-						path='/'
-						element={userEmail ? <SetsPage /> : <HomePage />}
-					/>
-					<Route path='/:setId' element={<SetDetailPage />} />
-				</Routes>
-			</main>
-			<Footer />
+			<Routes>
+				<Route
+					path='/'
+					element={
+						<Layout
+							userEmail={userEmail}
+							userName={userName}
+							logout={logoutHandler}
+							setLoginPageIsOpen={setLoginPageIsOpen}
+							setIsRegister={setIsRegister}
+							isRegister={isRegister}
+						/>
+					}
+				>
+					<Route index element={userEmail ? <SetsPage /> : <HomePage />} />
+					<Route path=':setId' element={<SetDetailPage />} />
+				</Route>
+			</Routes>
 		</>
 	)
 }

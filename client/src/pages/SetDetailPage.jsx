@@ -14,23 +14,20 @@ export function SetDetailPage() {
 
 	const dispatch = useDispatch()
 	const { title, study: terms = [] } = useSelector(selectCurrentSet)
-	const [redirect, setRedirect] = useState(false) // Если удаляем набор - редирект на главную
+	const [redirect, setRedirect] = useState(false)
 	const [addTermMode, setAddTermMode] = useState(false)
 
 	useEffect(() => {
-		// Запросить информацию о наборе
 		dispatch(getTheSet(setId))
 	}, [setId, dispatch])
 
-	const study = terms.filter((term) => !term.completed).reverse() // На изучении
-	const completed = terms.filter((term) => term.completed) // Изучены
+	const study = terms.filter((term) => !term.completed).reverse()
+	const completed = terms.filter((term) => term.completed)
 
-	// Переключить режим добавления термина
 	const toggleAddNewTermMode = () => {
 		setAddTermMode(!addTermMode)
 	}
 
-	// Переключить выполнение термина
 	const toggleCompleted = (termId) => {
 		const data = { setId, termId }
 		dispatch(toggleCompletedTheTerm(data))
