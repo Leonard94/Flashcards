@@ -48,6 +48,12 @@
 	img {
 		max-width: 25px;
 		cursor: pointer;
+
+		transition: all 0.3s ease;
+
+		&:hover {
+			transform: rotate(45deg);
+		}
 	}
 }
 
