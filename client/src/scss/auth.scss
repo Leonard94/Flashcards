@@ -37,8 +37,11 @@
 	width: 35px;
 	margin-left: auto;
 
+	img {
+		width: 100%;
+	}
+
 	transition: all 0.3s ease;
-	cursor: pointer;
 
 	&:hover {
 		transform: rotate(90deg);
@@ -49,14 +52,21 @@
 	font-size: 32px;
 	font-weight: 500;
 	line-height: 120%;
-	color: $color-text--third;
 
 	position: relative;
 	background: inherit;
 
+	color: $color-text--third;
+	transition: all 0.3s ease;
+
+	&:hover {
+		color: $color-text--main;
+	}
+
 	&:first-child {
 		margin-right: 40px;
 	}
+
 	&:after {
 		transition: all 0.3s ease;
 		content: '';
@@ -157,22 +167,48 @@
 	}
 }
 
-.auth-form__btn-row {
-	button {
-		position: relative;
+.auth-form__btn-submit {
+	position: relative;
+	display: block;
+	width: 100%;
+	margin-bottom: 20px;
+
+	&:disabled {
+		background: $color-text--third;
+	}
+}
+
+.auth-form__btn-redirect {
+	width: 100%;
+	border: 1px solid $color-main;
+	border-radius: 8px;
+
+	font-size: 14px;
+	line-height: 140%;
+	font-weight: 400;
+
+	transition: all 0.3s ease;
+	background: inherit;
+
+	&:hover {
+		background: $color-main;
+	}
+
+	&:hover span {
+		color: $color-text--main;
+	}
+
+	a {
 		display: block;
 		width: 100%;
+		padding: 9px 22px;
 
-		&:last-child {
-			margin-top: 20px;
-		}
+		color: $color-text--main;
+		transition: all 0.3s ease;
 
-		&:disabled {
-			background: $color-text--third;
+		span {
+			color: $color-main;
+			font-weight: 400;
 		}
-	}
-	span {
-		color: $color-main;
-		font-weight: 400;
 	}
 }

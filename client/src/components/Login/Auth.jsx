@@ -60,7 +60,7 @@ export function Auth({ error, loading }) {
 
 			<div className='auth-form__btn-row'>
 				<button
-					className='btn btn--solid'
+					className='btn btn--solid auth-form__btn-submit'
 					type='submit'
 					disabled={!isValid || loading}
 				>

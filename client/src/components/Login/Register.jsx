@@ -1,9 +1,10 @@
 import { useForm } from 'react-hook-form'
 import { useDispatch } from 'react-redux'
+import { NavLink } from 'react-router-dom'
 
 import { registerNewUser } from '../../store/user/user-actions'
 
-export function Register({ error, loading, setIsRegister }) {
+export function Register({ error, loading }) {
 	const dispatch = useDispatch()
 
 	const {
@@ -110,18 +111,17 @@ export function Register({ error, loading, setIsRegister }) {
 
 			<div className='auth-form__btn-row'>
 				<button
-					className='btn btn--solid'
+					className='btn btn--solid auth-form__btn-submit'
 					type='submit'
 					disabled={!isValid || loading}
 				>
 					{loading ? 'Загрузка' : 'Зарегистрироваться'}
 				</button>
-				<button
-					onClick={() => setIsRegister(false)}
-					className='btn btn--outline'
-					type='submit'
-				>
-					Уже есть учётная запись? <span>Войдите</span>
+
+				<button className='auth-form__btn-redirect'>
+					<NavLink to='/auth'>
+						Уже есть учётная запись? <span>Войдите</span>
+					</NavLink>
 				</button>
 			</div>
 		</form>

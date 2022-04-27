@@ -28,7 +28,6 @@ export const getTheSet = (setId) => async (dispatch) => {
 		})
 		.catch((err) => {
 			setError(err.response)
-			console.log(err.response)
 		})
 }
 

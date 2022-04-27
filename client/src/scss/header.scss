@@ -25,6 +25,7 @@
 		align-items: center;
 		justify-content: space-between;
 		flex-direction: column;
+
 		span {
 			color: $color-text--main;
 			font-weight: 400;
@@ -33,19 +34,33 @@
 			margin-top: 5px;
 		}
 	}
+}
 
-	button {
-		&:first-child {
-			margin-right: 15px;
-		}
+.header-auth__btn-login,
+.header-auth__btn-register {
+	border-radius: 8px;
+	transition: all 0.3s ease;
+
+	font-size: 14px;
+	line-height: 140%;
+	font-weight: 400;
+	padding: 9px 22px;
+
+	color: $color-text--main;
+}
+
+.header-auth__btn-login {
+	background: inherit;
+	border: 1px solid $color-main;
+	margin-right: 15px;
+
+	&:hover {
+		background: $color-main;
 	}
-	// !
-	.header-auth__login {
-		a {
-			padding: 10px;
-			border: 1px solid black;
-		}
-	}
+}
+
+.header-auth__btn-register {
+	background: $color-main;
 }
 
 .menu {
@@ -56,6 +71,7 @@
 .menu__list {
 	display: flex;
 	justify-content: space-between;
+
 	li {
 		a {
 			font-size: 16px;

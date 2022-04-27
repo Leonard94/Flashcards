@@ -1,15 +1,9 @@
 import { NavLink } from 'react-router-dom'
 
-import logo from '../assets/img/Logo.svg'
-import userLogo from '../assets/img/img-profile.svg'
+import logo from '../../assets/img/Logo.svg'
+import userLogo from '../../assets/img/img-profile.svg'
 
-export function Header({
-	userEmail,
-	userName,
-	logout,
-	setLoginPageIsOpen,
-	setIsRegister,
-}) {
+export function Header({ userEmail, userName, logout }) {
 	return (
 		<header className='header'>
 			<div className='container'>
@@ -50,26 +44,20 @@ export function Header({
 						) : (
 							<>
 								<li className='header-auth__login'>
-									<button
-										className='btn btn--outline'
-										onClick={() => {
-											setLoginPageIsOpen(true)
-											setIsRegister(false)
-										}}
+									<NavLink
+										className='header-auth__btn-login'
+										to='/auth'
 									>
 										Войти
-									</button>
+									</NavLink>
 								</li>
 								<li className='header-auth__register'>
-									<button
-										className='btn btn--solid'
-										onClick={() => {
-											setLoginPageIsOpen(true)
-											setIsRegister(true)
-										}}
+									<NavLink
+										className='header-auth__btn-register'
+										to='/register'
 									>
 										Регистрация
-									</button>
+									</NavLink>
 								</li>
 							</>
 						)}

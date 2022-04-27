@@ -14,14 +14,10 @@ import { SetDetailPage } from './pages/SetDetailPage'
 function App() {
 	const dispatch = useDispatch()
 
-	const [loginIsOpen, setLoginPageIsOpen] = useState(false)
-	const [isRegister, setIsRegister] = useState(false)
-
 	const {
 		email: userEmail,
 		name: userName,
 		loading,
-		error,
 	} = useSelector(selectAllInfoAboutUser)
 
 	useEffect(() => {
@@ -32,25 +28,9 @@ function App() {
 		}
 	})
 
-	// Если нажато открыть страницу авторизации\регистрации
-	if (loginIsOpen) {
-		// Если пользователь авторизован
-		if (userEmail !== null) {
-			setLoginPageIsOpen(false)
-		}
-		return (
-			<LoginPage
-				setLoginPageIsOpen={setLoginPageIsOpen}
-				error={error}
-				loading={loading}
-				isRegister={isRegister}
-				setIsRegister={setIsRegister}
-			/>
-		)
-	}
-
 	const logoutHandler = () => {
 		dispatch(logout())
+		// редирект на главную
 	}
 
 	return (
@@ -63,14 +43,16 @@ function App() {
 							userEmail={userEmail}
 							userName={userName}
 							logout={logoutHandler}
-							setLoginPageIsOpen={setLoginPageIsOpen}
-							setIsRegister={setIsRegister}
-							isRegister={isRegister}
 						/>
 					}
 				>
 					<Route index element={userEmail ? <SetsPage /> : <HomePage />} />
 					<Route path=':setId' element={<SetDetailPage />} />
+					<Route path='auth' element={<LoginPage isRegister={false} />} />
+					<Route
+						path='register'
+						element={<LoginPage isRegister={true} />}
+					/>
 				</Route>
 			</Routes>
 		</>

@@ -1,46 +1,52 @@
+import { useSelector } from 'react-redux'
+import { Navigate, NavLink } from 'react-router-dom'
+
 import { Auth } from '../components/Login/Auth'
 import { Register } from '../components/Login/Register'
 
+import { selectAllInfoAboutUser } from '../store/user/user-selectors'
+
 import iconClose from '../assets/icon/icon__close.svg'
 
-export function LoginPage(props) {
-	const { setLoginPageIsOpen, setIsRegister, isRegister, error, loading } = props
+export function LoginPage({ isRegister = false }) {
+	const { email, loading, error } = useSelector(selectAllInfoAboutUser)
+
+	if (email) {
+		return <Navigate to={'/'} />
+	}
 
 	return (
 		<div className='auth'>
 			<div className='auth__container'>
 				<div className='auth__btn-row'>
-					<button
+					<NavLink
+						to='/auth'
 						className={`auth__btn ${!isRegister && 'auth__btn--active'}`}
-						onClick={() => setIsRegister(false)}
 					>
 						Войти
-					</button>
+					</NavLink>
 
-					<button
+					<NavLink
+						to='/register'
 						className={`auth__btn ${isRegister && 'auth__btn--active'}`}
-						onClick={() => setIsRegister(true)}
 					>
 						Регистрация
-					</button>
-
-					<img
-						className='auth__close'
-						onClick={() => setLoginPageIsOpen(false)}
-						src={iconClose}
-						alt='close register page'
-						title='Закрыть окно регистрации/авторизации'
-					/>
+					</NavLink>
+					
+					<NavLink className='auth__close' to='/'>
+						<img
+							src={iconClose}
+							alt='close register page'
+							title={`Закрыть окно ${
+								isRegister ? 'регистрации' : 'авторизации'
+							}`}
+						/>
+					</NavLink>
 				</div>
+
 				<section className='auth-form__body'>
 					{!isRegister && <Auth error={error} loading={loading} />}
-					{isRegister && (
-						<Register
-							error={error}
-							loading={loading}
-							setIsRegister={setIsRegister}
-						/>
-					)}
+					{isRegister && <Register error={error} loading={loading} />}
 				</section>
 			</div>
 		</div>
