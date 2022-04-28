@@ -68,5 +68,5 @@ export const logout = () => (dispatch) => {
 	dispatch(setLoading(true))
 	axios
 		.post('http://localhost:5000/user/logout', {}, { withCredentials: true })
-		.then(dispatch(setUser(null)))
+		.then(dispatch(setUser(null, null)))
 }
