@@ -18,22 +18,24 @@ export function SetsPage() {
 	}, [dispatch])
 
 	return (
-		<div className='container'>
-			<ul className='sets-card__list'>
-				{!sets.length ? (
-					<>
-						<h2>Вы еще не добавили ни одного набора</h2>
-						<AddNewSet />
-					</>
-				) : (
-					<>
-						{sets.map((set) => (
-							<SetsCard key={set._id} {...set} />
-						))}
-						<AddNewSet />
-					</>
-				)}
-			</ul>
-		</div>
+		<main>
+			<div className='container'>
+				<ul className='sets-card__list'>
+					{!sets.length ? (
+						<>
+							<h2>Вы еще не добавили ни одного набора</h2>
+							<AddNewSet />
+						</>
+					) : (
+						<>
+							{sets.map((set) => (
+								<SetsCard key={set._id} {...set} />
+							))}
+							<AddNewSet />
+						</>
+					)}
+				</ul>
+			</div>
+		</main>
 	)
 }

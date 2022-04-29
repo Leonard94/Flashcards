@@ -7,9 +7,7 @@ export function Layout(props) {
 	return (
 		<>
 			<Header {...props} />
-			<main>
-				<Outlet />
-			</main>
+			<Outlet />
 			<Footer />
 		</>
 	)

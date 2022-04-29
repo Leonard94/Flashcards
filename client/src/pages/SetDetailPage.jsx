@@ -39,41 +39,43 @@ export function SetDetailPage() {
 
 	if (title) {
 		return (
-			<div className='container--small'>
-				<div className='detail'>
-					<DetailAbout
-						title={title}
-						setId={setId}
-						setRedirect={setRedirect}
-						lengthOfSet={terms.length}
-						addTermMode={addTermMode}
-						toggleAddNewTermMode={toggleAddNewTermMode}
-					/>
-
-					{addTermMode && (
-						<AddNewTerm goBack={toggleAddNewTermMode} id={setId} />
-					)}
-
-					{study.length ? (
-						<TermList
-							list={study}
+			<main>
+				<div className='container--small'>
+					<div className='detail'>
+						<DetailAbout
+							title={title}
 							setId={setId}
-							study={true}
-							toggleCompleted={toggleCompleted}
+							setRedirect={setRedirect}
+							lengthOfSet={terms.length}
+							addTermMode={addTermMode}
+							toggleAddNewTermMode={toggleAddNewTermMode}
 						/>
-					) : (
-						'Добавить новый термин'
-					)}
 
-					{completed.length ? (
-						<TermList
-							list={completed}
-							setId={setId}
-							toggleCompleted={toggleCompleted}
-						/>
-					) : null}
+						{addTermMode && (
+							<AddNewTerm goBack={toggleAddNewTermMode} id={setId} />
+						)}
+
+						{study.length ? (
+							<TermList
+								list={study}
+								setId={setId}
+								study={true}
+								toggleCompleted={toggleCompleted}
+							/>
+						) : (
+							'Добавить новый термин'
+						)}
+
+						{completed.length ? (
+							<TermList
+								list={completed}
+								setId={setId}
+								toggleCompleted={toggleCompleted}
+							/>
+						) : null}
+					</div>
 				</div>
-			</div>
+			</main>
 		)
 	} else {
 		return <h2>Загрузка...</h2>

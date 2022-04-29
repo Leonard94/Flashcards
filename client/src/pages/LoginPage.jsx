@@ -32,7 +32,7 @@ export function LoginPage({ isRegister = false }) {
 					>
 						Регистрация
 					</NavLink>
-					
+
 					<NavLink className='auth__close' to='/'>
 						<img
 							src={iconClose}

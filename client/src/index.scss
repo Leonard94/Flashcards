@@ -50,8 +50,7 @@ body {
 }
 
 main {
-	margin: 60px 0;
-	// position: relative;
+	padding: 60px 0;
 }
 
 .btn {
@@ -70,8 +69,8 @@ main {
 }
 
 .btn--outline {
-	background: inherit;
 	border: 1px solid $color-main;
+	background: inherit;
 	
 	&:hover {
 		background: $color-main;

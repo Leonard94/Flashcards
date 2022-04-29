@@ -10,6 +10,7 @@ import { Layout } from './components/Layout/Layout'
 import { checkIsAuthUser, logout } from './store/user/user-actions'
 import { selectAllInfoAboutUser } from './store/user/user-selectors'
 import { SetDetailPage } from './pages/SetDetailPage'
+import { GameFlashcardPage } from './pages/GameFlashcardPage'
 
 function App() {
 	const dispatch = useDispatch()
@@ -48,6 +49,10 @@ function App() {
 				>
 					<Route index element={userEmail ? <SetsPage /> : <HomePage />} />
 					<Route path=':setId' element={<SetDetailPage />} />
+					<Route
+						path=':setId/game-flashcard'
+						element={<GameFlashcardPage />}
+					/>
 					<Route path='auth' element={<LoginPage isRegister={false} />} />
 					<Route
 						path='register'

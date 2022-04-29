@@ -1,0 +1,96 @@
+.game-flashcard {
+	display: flex;
+	flex-direction: row;
+	padding: 15px;
+
+	background: $background-color--main;
+}
+
+.game-flashcard__body {
+	max-width: 802px;
+	margin: auto;
+
+	flex: 1;
+}
+
+.card {
+	min-width: 200px;
+	max-width: 802px;
+	min-height: 392px;
+
+	position: relative;
+	perspective: 1000px;
+
+	margin-bottom: 30px;
+}
+
+.card__front,
+.card__back {
+	display: flex;
+	align-items: center;
+	justify-content: center;
+	position: absolute;
+
+	height: 100%;
+	width: 100%;
+	left: 0;
+	top: 0;
+
+	backface-visibility: hidden;
+	pointer-events: none;
+	transition: 0.4s;
+
+	font-size: 48px;
+	line-height: 130%;
+	font-weight: 500;
+	letter-spacing: 0.1em;
+	color: $color-text--main;
+
+	padding: 40px;
+	text-align: center;
+	border-radius: 24px;
+	background: $background-color--light;
+}
+
+.card__front {
+	// /* background: #364758; */
+}
+
+.card__back {
+	transform: rotateX(180deg);
+}
+
+.card.active {
+	.card__front {
+		transform: rotateX(180deg);
+	}
+	.card__back {
+		transform: rotateX(360deg);
+	}
+}
+
+.game-flashcard__btn-row {
+	display: flex;
+	justify-content: space-around;
+
+	button {
+		font-size: 14px;
+		font-weight: 400;
+		color: $color-text--main;
+
+		width: 120px;
+
+		padding: 10px 0;
+		border-radius: 8px;
+		transition: all 0.3s ease;
+
+		&:first-child {
+			border: 1px solid $color-wrong;
+			background: inherit;
+		}
+
+		&:last-child {
+			background: $color-main;
+		}
+	}
+}

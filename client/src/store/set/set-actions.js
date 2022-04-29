@@ -109,7 +109,7 @@ export const removeTheTerm = (data) => async (dispatch) => {
 		})
 }
 
-// Удаляем термин
+// Переключаем выполнение термина
 export const toggleCompletedTheTerm = (data) => async (dispatch) => {
 	return axios
 		.put(`http://localhost:5000/sets/set/term/toggle-completed`, data, {
