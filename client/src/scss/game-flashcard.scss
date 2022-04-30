@@ -1,7 +1,7 @@
 .game-flashcard {
 	display: flex;
 	flex-direction: row;
-	padding: 15px;
+	padding: 0px 15px;
 
 	background: $background-color--main;
 }
@@ -53,11 +53,22 @@
 }
 
 .card__front {
-	// /* background: #364758; */
+	/* background: #364758; */
 }
 
 .card__back {
 	transform: rotateX(180deg);
+}
+
+.card__counter {
+	position: absolute;
+	z-index: 2;
+	right: 20px;
+	top: 20px;
+
+	font-weight: 300;
+
+	color: $color-text--second;
 }
 
 .card.active {

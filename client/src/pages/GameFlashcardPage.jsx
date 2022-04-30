@@ -5,21 +5,23 @@ import { useParams } from 'react-router-dom'
 import { Flashcard } from '../components/GameFlashcard/Flashcard'
 import { getTheSetListOfTerms } from '../store/flashcard/flashcard-actions'
 
-import iconBack from '../assets/icon/icon__back.svg'
-
 export function GameFlashcardPage() {
 	const dispatch = useDispatch()
 	const { setId } = useParams()
-	const [currentWord, setCurrentWord] = useState(0)
+	const [currentTerm, setCurrentTerm] = useState(0)
+	const [flip, setFlip] = useState(false)
 
 	const { list, error, loading } = useSelector((state) => state.flashcard)
+
+	const studyTerm = list.filter((term) => term.completed === false)
 
 	useEffect(() => {
 		dispatch(getTheSetListOfTerms(setId))
 	}, [setId, dispatch])
 
-	const nextCurrentWord = () => {
-		setCurrentWord(currentWord + 1)
+	const nextCurrentTerm = () => {
+		setFlip(false)
+		setCurrentTerm(currentTerm + 1)
 	}
 
 	return (
@@ -28,12 +30,16 @@ export function GameFlashcardPage() {
 			{list.length && (
 				<div className='game-flashcard__body'>
 					<Flashcard
-						key={list[currentWord].idWord}
-						{...list[currentWord]}
+						key={studyTerm[currentTerm].idWord}
+						{...studyTerm[currentTerm]}
+						flip={flip}
+						setFlip={setFlip}
+						currentTerm={currentTerm}
+						allTerm={studyTerm.length}
 					/>
 					<div className='game-flashcard__btn-row'>
-						<button onClick={nextCurrentWord}>Учить ещё</button>
-						<button onClick={nextCurrentWord}>Знаю</button>
+						<button onClick={nextCurrentTerm}>Учить ещё</button>
+						<button onClick={nextCurrentTerm}>Знаю</button>
 					</div>
 				</div>
 			)}
