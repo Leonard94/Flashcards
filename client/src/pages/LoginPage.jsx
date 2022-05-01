@@ -1,5 +1,5 @@
 import { useSelector } from 'react-redux'
-import { Navigate, NavLink } from 'react-router-dom'
+import { Navigate, NavLink, useLocation } from 'react-router-dom'
 
 import { Auth } from '../components/Login/Auth'
 import { Register } from '../components/Login/Register'
@@ -11,12 +11,16 @@ import iconClose from '../assets/icon/icon__close.svg'
 export function LoginPage({ isRegister = false }) {
 	const { email, loading, error } = useSelector(selectAllInfoAboutUser)
 
+	const location = useLocation()
+	const fromPage = location.state?.from?.pathname || '/'
+
 	if (email) {
-		return <Navigate to={'/'} />
+		return <Navigate to={fromPage} />
 	}
 
 	return (
 		<div className='auth'>
+			<span>Пришли отсюда: {fromPage}</span>
 			<div className='auth__container'>
 				<div className='auth__btn-row'>
 					<NavLink

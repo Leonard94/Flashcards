@@ -4,10 +4,8 @@ export function RequireAuth({ children, email }) {
 	const location = useLocation()
 
 	if (email === null) {
-		console.log('Юзер не авторизован')
-		return <Navigate to='/auth' />
+		return <Navigate to='/auth' state={{ from: location }} />
 	}
-	console.log('Пользователю можно')
 
 	return children
 }
