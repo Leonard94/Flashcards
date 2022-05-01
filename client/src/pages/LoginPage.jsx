@@ -20,7 +20,6 @@ export function LoginPage({ isRegister = false }) {
 
 	return (
 		<div className='auth'>
-			<span>Пришли отсюда: {fromPage}</span>
 			<div className='auth__container'>
 				<div className='auth__btn-row'>
 					<NavLink

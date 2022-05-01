@@ -24,7 +24,9 @@ export function DetailAbout(props) {
 			</div>
 			<div className='detail__about-right'>
 				<button className='btn btn--solid'>
-					<NavLink to={`game-flashcard`}>Начать изучение</NavLink>
+					<NavLink to={`/game-flashcard/${setId}`}>
+						Начать изучение
+					</NavLink>
 				</button>
 				<button onClick={toggleAddNewTermMode} className='btn btn--outline'>
 					{!addTermMode ? 'Добавить\u00a0термин' : 'Не добавлять'}

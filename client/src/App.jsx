@@ -4,13 +4,14 @@ import { useDispatch, useSelector } from 'react-redux'
 import { HomePage } from './pages/HomePage'
 import { LoginPage } from './pages/LoginPage'
 import { SetsPage } from './pages/SetsPage'
+import { SetDetailPage } from './pages/SetDetailPage'
+import { GameFlashcardPage } from './pages/GameFlashcardPage'
+import { NotFoundPage } from './pages/NotFoundPage'
 import { Layout } from './components/Layout/Layout'
+import { RequireAuth } from './components/hoc/RequireAuth'
 
 import { logout } from './store/user/user-actions'
 import { selectAllInfoAboutUser } from './store/user/user-selectors'
-import { SetDetailPage } from './pages/SetDetailPage'
-import { GameFlashcardPage } from './pages/GameFlashcardPage'
-import { RequireAuth } from './components/hoc/RequireAuth'
 
 function App() {
 	const dispatch = useDispatch()
@@ -37,7 +38,7 @@ function App() {
 				>
 					<Route index element={email ? <SetsPage /> : <HomePage />} />
 					<Route
-						path=':setId'
+						path='set/:setId/'
 						element={
 							<RequireAuth email={email}>
 								<SetDetailPage />
@@ -45,18 +46,19 @@ function App() {
 						}
 					/>
 					<Route
-						path=':setId/game-flashcard'
+						path='game-flashcard/:setId'
 						element={
 							<RequireAuth email={email}>
 								<GameFlashcardPage />
 							</RequireAuth>
 						}
 					/>
-					<Route path='auth' element={<LoginPage isRegister={false} />} />
+					<Route path='auth' element={<LoginPage />} />
 					<Route
 						path='register'
 						element={<LoginPage isRegister={true} />}
 					/>
+					<Route path='*' element={<NotFoundPage />} />
 				</Route>
 			</Routes>
 		</>
