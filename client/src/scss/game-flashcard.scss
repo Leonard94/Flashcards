@@ -105,3 +105,46 @@
 		}
 	}
 }
+
+.card-completed {
+	// height: 100%;
+	// width: 100%;
+	// border-radius: 10px;
+
+	// color: white;
+	// background: #f1a53f;
+
+	display: flex;
+	align-items: center;
+	justify-content: center;
+	position: absolute;
+
+	height: 100%;
+	width: 100%;
+	left: 0;
+	top: 0;
+
+	line-height: 140%;
+	font-weight: 400;
+	color: $color-text--main;
+
+	padding: 40px;
+	text-align: center;
+	border-radius: 24px;
+	background: $background-color--light;
+
+	h2 {
+		font-size: 32px;
+		font-weight: 500;
+		margin-bottom: 20px;
+	}
+	h3 {
+		font-size: 24px;
+		margin-bottom: 40px;
+	}
+	h4 {
+		font-size: 18px;
+		margin-bottom: 20px;
+	}
+}
+

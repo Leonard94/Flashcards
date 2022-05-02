@@ -1,20 +1,46 @@
-import { SET_FLASHCARD_LIST_OF_TERMS, SET_LOADING } from './flashcard-actions'
+import {
+	SET_FLASHCARD_LIST_OF_TERMS,
+	SET_LOADING,
+	SET_COMPLETED_TERM,
+} from './flashcard-actions'
 
 const initialState = {
-	list: [],
+	termList: [],
 	loading: false,
 	error: null,
 }
 
 export const flashcardReducer = (state = initialState, action) => {
 	switch (action.type) {
-		case SET_FLASHCARD_LIST_OF_TERMS:
+		case SET_FLASHCARD_LIST_OF_TERMS: {
 			return {
 				...state,
 				loading: false,
 				error: null,
-				list: action.payload,
+				termList: action.payload,
 			}
+		}
+
+		case SET_COMPLETED_TERM: {
+			const completedTerm = state.termList.map((term) => {
+				if (term._id === action.payload) {
+					term.completed = true
+				}
+				return term
+			})
+			// case SET_COMPLETED_TERM: {
+			// 	const completedTerm = state.studyTerm.map((term) => {
+			// 		if (term._id === action.payload) {
+			// 			term.completed = true
+			// 		}
+			// 		return term
+			// 	})
+
+			return {
+				...state,
+				completedTerm,
+			}
+		}
 
 		case SET_LOADING:
 			return {
