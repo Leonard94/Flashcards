@@ -1,7 +1,6 @@
 import {
 	SET_FLASHCARD_LIST_OF_TERMS,
 	SET_LOADING,
-	SET_COMPLETED_TERM,
 } from './flashcard-actions'
 
 const initialState = {
@@ -18,27 +17,6 @@ export const flashcardReducer = (state = initialState, action) => {
 				loading: false,
 				error: null,
 				termList: action.payload,
-			}
-		}
-
-		case SET_COMPLETED_TERM: {
-			const completedTerm = state.termList.map((term) => {
-				if (term._id === action.payload) {
-					term.completed = true
-				}
-				return term
-			})
-			// case SET_COMPLETED_TERM: {
-			// 	const completedTerm = state.studyTerm.map((term) => {
-			// 		if (term._id === action.payload) {
-			// 			term.completed = true
-			// 		}
-			// 		return term
-			// 	})
-
-			return {
-				...state,
-				completedTerm,
 			}
 		}
 

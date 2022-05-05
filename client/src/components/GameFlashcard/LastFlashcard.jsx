@@ -1,5 +1,8 @@
-export function LastFlashcard({ learnedTermsCounter, continueToStudy }) {
-	// Пока идёт синхронизация redux и сервера - показывать загрузку
+export function LastFlashcard({
+	learnedTermsCounter,
+	continueToStudy,
+	resetProgress,
+}) {
 
 	return (
 		<div className='card'>
@@ -19,9 +22,11 @@ export function LastFlashcard({ learnedTermsCounter, continueToStudy }) {
 							<h4>Продолжайте заниматься, чтобы выучить еще 7777</h4>
 						</>
 					)}
-					<button onClick={continueToStudy}>Продолжить</button>
+					<button onClick={continueToStudy}>Продолжить изучение</button>
 					<br />
-					<button>Начать заново</button>
+					<button onClick={resetProgress}>
+						Сбросить прогресс и начать заного
+					</button>
 				</div>
 			</div>
 		</div>
