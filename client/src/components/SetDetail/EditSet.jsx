@@ -1,13 +1,13 @@
 import { useState } from 'react'
 import { useDispatch } from 'react-redux'
 
-import { deleteTheSet, renameTheSet } from '../../store/set/set-actions'
+import { deleteTheSet, renameTheSet, resetProgressInTheSet } from '../../store/set/set-actions'
 import { getSetsList } from '../../store/sets/sets-actions'
 import iconSettings from '../../assets/icon/icon__settings.svg'
 
 import { DropdownEditSet } from './DropdownEditSet'
 
-export function EditSet({ title, id, setRedirect }) {
+export function EditSet({ title, setId, setRedirect }) {
 	const dispatch = useDispatch()
 	const [name, setName] = useState(title)
 	const [editModeForTitle, setEditModeForTitle] = useState(false)
@@ -18,7 +18,7 @@ export function EditSet({ title, id, setRedirect }) {
 
 		if (title !== name) {
 			// Если изменили название набора
-			const data = { setId: id, title: name }
+			const data = { setId, title: name }
 			dispatch(renameTheSet(data)).then(() => {
 				setEditModeForTitle(false)
 			})
@@ -28,7 +28,7 @@ export function EditSet({ title, id, setRedirect }) {
 	}
 
 	const deleteSetHandle = () => {
-		dispatch(deleteTheSet(id)).then(() => {
+		dispatch(deleteTheSet(setId)).then(() => {
 			setRedirect(true)
 			dispatch(getSetsList)
 		})
@@ -44,6 +44,10 @@ export function EditSet({ title, id, setRedirect }) {
 		setEditModeForTitle(false)
 	}
 
+	const resetProgress = () => {
+		dispatch(resetProgressInTheSet(setId))
+	}
+
 	return (
 		<div className='detail__about-title'>
 			{isOpenMenu && (
@@ -52,6 +56,7 @@ export function EditSet({ title, id, setRedirect }) {
 					deleteSetHandle={deleteSetHandle}
 					setIsOpenMenu={setIsOpenMenu}
 					renameTitle={renameTitle}
+					resetProgress={resetProgress}
 				/>
 			)}
 

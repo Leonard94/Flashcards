@@ -192,4 +192,28 @@ router.put('/set/term/toggle-completed', async (req, res) => {
 	}
 })
 
+// Обнуляем прогресс изучения терминов
+router.put('/set/term/reset', async (req, res) => {
+	try {
+		const payload = jwt.verify(req.cookies.token, config.get('JWTSECRET'))
+		const user = await User.findById(payload.id)
+
+		// Перебираем все наборы
+		const updateUser = user.sets.map((s) => {
+			// Если это нужный набор
+			if (s.id === req.body.setId) {
+				// перебираем все термины и изменяем выполнение
+				s.study.map((term) => (term.completed = false))
+			}
+			return s
+		})
+		user.sets = updateUser
+		await user.save()
+		res.send(user.sets)
+	} catch (e) {
+		res.status(500).json(e.message)
+		console.log(e)
+	}
+})
+
 module.exports = router

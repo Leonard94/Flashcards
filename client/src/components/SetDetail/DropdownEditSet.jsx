@@ -3,7 +3,7 @@ import { useEffect, useRef } from 'react'
 import iconEdit from '../../assets/icon/icon__edit.svg'
 import iconRemove from '../../assets/icon/icon__remove.svg'
 
-export function DropdownEditSet({ deleteSetHandle, setIsOpenMenu, renameTitle }) {
+export function DropdownEditSet({ deleteSetHandle, setIsOpenMenu, renameTitle, resetProgress }) {
 	const menuRef = useRef()
 
 	const handleOnClick = (e) => {
@@ -26,7 +26,7 @@ export function DropdownEditSet({ deleteSetHandle, setIsOpenMenu, renameTitle })
 					<img src={iconEdit} alt='Переименовать' />
 					Переименовать
 				</li>
-				<li>
+				<li onClick={resetProgress}>
 					<img src={iconRemove} alt='Удалить набор' />
 					Сбросить&nbsp;прогресс
 				</li>

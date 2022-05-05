@@ -50,6 +50,7 @@ export const deleteTheSet = (setId) => async (dispatch) => {
 
 // Добавляем новый термин в набор
 export const addNewTermToTheSet = (data) => async (dispatch) => {
+	dispatch(setLoading(true))
 	return axios
 		.put(`http://localhost:5000/sets/set/add-new-word`, data, {
 			withCredentials: true,
@@ -76,6 +77,24 @@ export const renameTheSet = (data) => async (dispatch) => {
 		.catch((err) => {
 			console.log(err.response)
 			setError(err.response)
+		})
+}
+
+// Обнулить прогресс изучения набора
+export const resetProgressInTheSet = (setId) => async (dispatch) => {
+	// dispatch(setLoading(true))
+	axios
+		.put(
+			`http://localhost:5000/sets/set/term/reset`,
+			{ setId },
+			{ withCredentials: true }
+		)
+		.then(() => {
+			dispatch(getTheSet(setId))
+		})
+		.catch((err) => {
+			// setError(err.response)
+			console.log(err.response)
 		})
 }
 

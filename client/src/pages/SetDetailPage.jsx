@@ -18,6 +18,7 @@ export function SetDetailPage() {
 	const [addTermMode, setAddTermMode] = useState(false)
 
 	useEffect(() => {
+		console.log('useEffect')
 		dispatch(getTheSet(setId))
 	}, [setId, dispatch])
 

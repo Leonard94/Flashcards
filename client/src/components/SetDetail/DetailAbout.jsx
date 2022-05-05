@@ -17,7 +17,7 @@ export function DetailAbout(props) {
 	return (
 		<section className='detail__about'>
 			<div className='detail__about-left'>
-				<EditSet title={title} id={setId} setRedirect={setRedirect} />
+				<EditSet title={title} setId={setId} setRedirect={setRedirect} />
 				<div className='detail__about-allcounter'>
 					{lengthOfSet} {declination(lengthOfSet)}
 				</div>

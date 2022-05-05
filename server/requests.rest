@@ -57,3 +57,12 @@ Content-Type: application/json
     "setId": "625d5e405701f0be2ba6c6df",
     "termId": "625eb1ed3ee443a50c4eb7d8"
 }
+
+### Обнуляем прогресс
+PUT http://localhost:5000/sets/set/term/reset
+Content-Type: application/json
+
+{
+    "setId": "625d5e405701f0be2ba6c6df"
+}
+
